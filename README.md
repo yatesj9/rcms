@@ -9,6 +9,33 @@ Coming Soon
 ## Usage
 ---
 Coming Soon
+## TODO
+---
+Routes
+* Upload
+    * ~~Single Upload~~ 
+        * Validation  
+    * Multi Upoad
+        * Validation  
+* Folders
+    * GET
+    * POST
+    * PUT
+    * DELETE
+* Files
+    * GET
+    * DELETE
+* Links
+    * GET
+    * POST
+    * PUT
+    * DELETE
+* Tags
+    * GET
+    * POST
+    * PUT
+    * DELETE
+    
 
 ## Documentation
 ---
