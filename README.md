@@ -43,7 +43,8 @@
 ```			   
 ## Resource
 ```clojure
-{{:file {:size 3937, :tempfile #<File /var/folders/TEMP LOCATION>, :content-type 	application/x-javascript, :filename ######}}}
+{{:file {:size 3937, :tempfile #<File /var/folders/TEMP LOCATION>, :content-type
+application/x-javascript, :filename ######}}}
 ```
 ## Response
 	//Successful upload
@@ -65,7 +66,10 @@
 ## Resource
 Vector containing map of multiple files
 ```clojure
-[{:file {:size 3937, :tempfile #<File /var/folders/TEMP LOCATION>, :content-type application/x-javascript, :filename ######}}{:file {:size 3937, :tempfile #<File /var/folders/TEMP LOCATION>, :content-type application/x-javascript, :filename ######}}]
+[{:file {:size 3937, :tempfile #<File /var/folders/TEMP LOCATION>, :content-type
+application/x-javascript, :filename ######}}
+{:file {:size 3937, :tempfile #<File /var/folders/TEMP LOCATION>, :content-type
+application/x-javascript, :filename ######}}]
 ```
 
 ## Response

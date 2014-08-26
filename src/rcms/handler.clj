@@ -4,8 +4,7 @@
             [ring.middleware.file-info :refer [wrap-file-info]]
             [hiccup.middleware :refer [wrap-base-url]]
             [compojure.handler :as handler]
-            [compojure.route :as route]
-            [rcms.routes.home :refer [home-routes]]))
+            [compojure.route :as route]))
 
 (defn init []
   (println "rcms is starting"))
@@ -18,7 +17,7 @@
   (route/not-found "Not Found"))
 
 (def app
-  (-> (routes home-routes app-routes)
+  (-> (routes app-routes)
       (handler/site)
       (wrap-base-url)))
 
