@@ -12,3 +12,5 @@ pom.xml
 *.tar
 /logs
 *.log
+.nrepl-port
+.lein-repl-history

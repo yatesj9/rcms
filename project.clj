@@ -5,8 +5,11 @@
                  [compojure "1.1.8"]
                  [hiccup "1.0.5"]
                  [ring-server "0.3.1"]
-                 [lib-noir "0.8.6"]]
-  :plugins [[lein-ring "0.8.10"]]
+                 [lib-noir "0.8.6"]
+                 [expectations "2.0.9"]
+                 [me.raynes/fs "1.4.6"]]
+  :plugins [[lein-ring "0.8.10"]
+            [lein-autoexpect "1.2.2"]]
   :ring {:handler rcms.handler/app
          :init rcms.handler/init
          :destroy rcms.handler/destroy}

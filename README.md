@@ -12,6 +12,6 @@ Coming Soon
 
 ## Documentation
 ---
-* [RCMS API Routes](https://github.com/yatesj9/rcms/blob/master/doc/ROUTES_API.md)
-	
+* [RCMS API Routes](https://github.com/yatesj9/rcms/blob/master/doc/routes.md)
+* [RCMS API Routes Details](https://github.com/yatesj9/rcms/blob/master/doc/routes_details.md)
 
