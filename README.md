@@ -15,13 +15,16 @@ Routes
 * Upload
     * ~~Single Upload~~ 
         * Validation  
-    * Multi Upoad
+    * Multi Upload
         * Validation  
 * Folders
     * GET
     * POST
+        * ~~Create~~
     * PUT
+        * ~~Rename~~
     * DELETE
+        * ~~Remove~~
 * Files
     * GET
     * DELETE
@@ -41,4 +44,3 @@ Routes
 ---
 * [RCMS API Routes](https://github.com/yatesj9/rcms/blob/master/doc/routes.md)
 * [RCMS API Routes Details](https://github.com/yatesj9/rcms/blob/master/doc/routes_details.md)
-
