@@ -13,18 +13,23 @@ Coming Soon
 ---
 Routes
 * Upload
-    * ~~Single Upload~~ 
+    * ~~Single Upload~~
+        * Add to DB table  
         * Validation  
     * Multi Upload
+        * Add to DB table   
         * Validation  
 * Folders
     * GET
     * POST
         * ~~Create~~
+        * Add to DB table
     * PUT
         * ~~Rename~~
+        * Change DB table
     * DELETE
         * ~~Remove~~
+        * Remove from DB table
 * Files
     * GET
     * DELETE

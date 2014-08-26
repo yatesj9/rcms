@@ -1,5 +1,6 @@
 (ns rcms.tests.models.folders-tests
-  (:require [rcms.models.folders :refer [create-directory
+  (:require [rcms.models.folders :refer [get-directories
+                                         create-directory
                                          remove-directory
                                          rename-directory]])
   (:use [expectations :refer [expect]]))
@@ -22,4 +23,10 @@
 ;Create and Rename directory, than remove new named directory
 (expect true (create-directory resource-path))
 (expect true (rename-directory resource-path "resources/files/tests2"))
+
+(expect true (create-directory resource-path))
+(expect '("tests2" "tests") (get-directories))
+
+;CLEAN remove directories
+(expect true (remove-directory resource-path))
 (expect true (remove-directory "resources/files/tests2"))

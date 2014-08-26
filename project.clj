@@ -13,7 +13,8 @@
                  [org.clojure/tools.logging "0.3.0"]
                  [org.clojure/java.jdbc "0.3.5"]
                  [com.jolbox/bonecp "0.8.0.RELEASE"]
-                 [com.h2database/h2 "1.4.181"]]
+                 [com.h2database/h2 "1.4.181"]
+                 [cheshire "4.0.1"]]
   :plugins [[lein-ring "0.8.10"]
             [lein-autoexpect "1.2.2"]]
   :ring {:handler rcms.handler/app
