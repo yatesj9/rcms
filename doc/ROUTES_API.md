@@ -40,6 +40,6 @@
 
 	POST 	/tokens 			        - Authenticate Employee	
 	
-* [Routes Details](http://)
+* [Routes Details](https://github.com/yatesj9/rcms/blob/master/doc/ROUTES.md)
 
 
