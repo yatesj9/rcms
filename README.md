@@ -26,11 +26,13 @@ Routes/Model functions
 * Folders
     * GET
         * ~~Get list of folder from path~~
-        * Get list of folder's from DB
+        * ~~Get single folder from DB~~
+        * Get list of folder's from DB        
         * Validation
     * POST
         * ~~Create~~
-        * Add to DB table
+        * ~~Add to DB table~~
+            * ~~Allow only one record per folder name~~ 
         * Validation
     * PUT
         * ~~Rename~~
@@ -38,7 +40,7 @@ Routes/Model functions
         * Validation
     * DELETE
         * ~~Remove~~
-        * Remove from DB table
+        * ~~Remove from DB table~~
         * Validation
 * Files
     * GET

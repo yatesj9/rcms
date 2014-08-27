@@ -5,7 +5,7 @@
   (:use [expectations :refer [expect]]))
 
 ;Return default mode
-(expect :development (get-mode))
+;(expect :development (get-mode))
 
 ;Set and return DB settings for TEST, h2 DB
 (expect :test (set-mode! :test))

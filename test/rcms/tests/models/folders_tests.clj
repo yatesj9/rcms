@@ -2,13 +2,18 @@
   (:require [rcms.models.folders :refer [get-directories
                                          create-directory
                                          remove-directory
-                                         rename-directory]]
+                                         rename-directory
+                                         get-folders
+                                         get-folder
+                                         add-folder
+                                         remove-folder
+                                         rename-folder]]
             [rcms.tests.helper :refer [initialize-test-connection
                                        folder-schema
                                        folder-data]]
-            [rcms.db           :refer [drop-table!
-                                       create-table!
-                                       populate]])
+            [rcms.db :refer [drop-table!
+                             create-table!
+                             populate]])
   (:use [expectations :refer [expect]]))
 
 
@@ -22,6 +27,17 @@
 
 (def resource-path
   "resources/files/tests")
+
+(defn clean-folders
+  {:expectations-options :after-run}
+  []
+  (do (remove-directory resource-path)
+      (remove-directory "resources/files/tests2")))
+
+
+;-------------------------------------------------------------------------------
+; --- Direct Folder TESTS
+;-------------------------------------------------------------------------------
 
 ;Create directory, return true
 (expect true (create-directory resource-path))
@@ -39,10 +55,29 @@
 (expect true (create-directory resource-path))
 (expect true (rename-directory resource-path "resources/files/tests2"))
 
-;Create directory, return list of all directories
-(expect true (create-directory resource-path))
-(expect '("tests2" "tests") (get-directories))
 
-;CLEAN remove directories
-(expect true (remove-directory resource-path))
-(expect true (remove-directory "resources/files/tests2"))
+;-------------------------------------------------------------------------------
+; --- Database Folder TESTS
+;-------------------------------------------------------------------------------
+
+;Returns sequence of maps containg all folders in DB
+(expect (map #(assoc %1 :id %2) folder-data (range 1 3)) (get-folders))
+
+;Add new folder record to DB
+(expect true (seq? (add-folder {:id nil
+                                :name "TestFolder"
+                                :resource "resources/files/testfolder"})) )
+
+;Remove folder record from DB
+(expect '(1) (remove-folder 3))
+
+;Returns sequence of maps matching helper schema
+(expect (map #(assoc %1 :id %2) folder-data (range 1 3)) (get-folders))
+
+;Rename folder in DB, add record, rename, verify
+(expect true (seq? (add-folder {:id nil
+                                :name "TestFolder"
+                                :resource "resources/files/testfolder"})) )
+(expect '(1) (rename-folder "TestFolder" "testfolder"))
+;Return true for renamed folder
+(expect true (some #(= "testfolder" (:name %)) (get-folders)))

@@ -30,7 +30,7 @@ dir-names
 
 (cheshire/decode (cheshire/generate-string (map #(str %) dir-names)))
 
-(some #(= "tests3" %) dir-names)
+(some #(= "tests" %) dir-names)
 
 (in? dir-names "tests2")
 
@@ -69,4 +69,11 @@ get-dir
 (require '[clojure.java.jdbc :as sqlc])
 
 (sqlc/query (sql/get-connection) ["select * from folders"])
+
+;Return millis
+(System/currentTimeMillis)
+
+(def me-map [ {:id nil :name "henry"} {:id nil :name "bob"}  ])
+
+(map #(assoc %1 :id %2) me-map (range 1 10))
 
