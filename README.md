@@ -54,6 +54,19 @@ Routes/Model functions
     * PUT
     * DELETE
 
+    
+Database Connection
+* ~~Bone connection pooling~~
+* ~~Create Tbl~~
+* ~~Drop Tbl~~
+* Test - DB
+    * ~~H2 DB~~
+    * ~~Initialization~~
+    * ~~Schema~~
+    * Fixtures
+* Development - DB
+* Production - DB
+
 Authentication - Vault-API, *link to follow*
 
 Authorization - local/remote DB table

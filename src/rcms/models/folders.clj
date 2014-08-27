@@ -1,6 +1,10 @@
 (ns rcms.models.folders
   (:require [me.raynes.fs :as fs]))
 
+; --- Database folder manipulation---------------------------------------------
+
+
+; --- Direct folder manipulation-----------------------------------------------
 (defn get-directories
   []
   (let [dir-seq (fs/iterate-dir "resources/files")]

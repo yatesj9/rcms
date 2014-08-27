@@ -43,3 +43,30 @@ dir-names
 
 get-dir
 
+(require '[rcms.tests.helper :refer [folder-schema
+                                     folder-data] :reload true])
+
+(:table folder-schema)
+
+(:fields folder-schema)
+
+(require '[rcms.config :refer [set-mode!
+                               get-settings]])
+
+(require '[rcms.db :as sql :reload true])
+
+(do (set-mode! :test)
+ (sql/set-connection! (sql/pooled-datasource (get-settings :database :connection))) )
+
+(sql/create-table! (sql/get-connection) (:table folder-schema) (:fields folder-schema))
+
+(sql/drop-table! (sql/get-connection) (:table folder-schema))
+
+(sql/get-connection)
+
+(sql/populate (sql/get-connection) :folders folder-data)
+
+(require '[clojure.java.jdbc :as sqlc])
+
+(sqlc/query (sql/get-connection) ["select * from folders"])
+

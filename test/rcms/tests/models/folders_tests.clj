@@ -2,8 +2,23 @@
   (:require [rcms.models.folders :refer [get-directories
                                          create-directory
                                          remove-directory
-                                         rename-directory]])
+                                         rename-directory]]
+            [rcms.tests.helper :refer [initialize-test-connection
+                                       folder-schema
+                                       folder-data]]
+            [rcms.db           :refer [drop-table!
+                                       create-table!
+                                       populate]])
   (:use [expectations :refer [expect]]))
+
+
+(defn initialize-db
+  {:expectations-options :before-run}
+  []
+  (let [c (initialize-test-connection)
+        - (drop-table! c (:table folder-schema))
+        _ (create-table! c (:table folder-schema) (:fields folder-schema))
+        _ (populate c :folders folder-data)]) )
 
 (def resource-path
   "resources/files/tests")
@@ -24,6 +39,7 @@
 (expect true (create-directory resource-path))
 (expect true (rename-directory resource-path "resources/files/tests2"))
 
+;Create directory, return list of all directories
 (expect true (create-directory resource-path))
 (expect '("tests2" "tests") (get-directories))
 
