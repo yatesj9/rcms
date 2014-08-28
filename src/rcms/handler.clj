@@ -2,10 +2,13 @@
   (:require [compojure.core :refer [defroutes routes]]
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.file-info :refer [wrap-file-info]]
+            [ring.middleware.json :refer [wrap-json-response
+                                          wrap-json-params]]
             [hiccup.middleware :refer [wrap-base-url]]
             [compojure.handler :as handler]
             [compojure.route :as route]
-            [rcms.routes.uploads :refer [upload-routes]]))
+            [rcms.routes.uploads :refer [upload-routes]]
+            [rcms.routes.folders :refer [folder-routes]]))
 
 (defn init []
   (println "rcms is starting"))
@@ -18,6 +21,7 @@
   (route/not-found "Not Found"))
 
 (def app
-  (-> (routes upload-routes app-routes)
+  (-> (routes upload-routes folder-routes app-routes)
       (handler/site)
-      (wrap-base-url)))
+      (wrap-json-response)
+      (wrap-json-params)))

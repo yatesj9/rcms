@@ -1,4 +1,5 @@
 (ns rcms.repl
+  (:require [rcms.config :refer [set-mode!]])
   (:use rcms.handler
         ring.server.standalone
         [ring.middleware file-info file]))
@@ -18,15 +19,16 @@
 
 (defn start-server
   "used for starting the server in development mode from REPL"
-  [& [port]]
+  [mode & [port]]
   (let [port (if port (Integer/parseInt port) 8080)]
+    (do (set-mode! mode)
     (reset! server
             (serve (get-handler)
                    {:port port
                     :init init
                     :auto-reload? true
                     :destroy destroy
-                    :join true}))
+                    :join true}))  )
     (println (str "You can view the site at http://localhost:" port))))
 
 (defn stop-server []

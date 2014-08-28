@@ -16,7 +16,7 @@
 
 (defroutes upload-routes
   (POST "/upload" {params :params}
-        (handle-upload (:filename params)))
+        (handle-upload (:file params)))
 
   (POST "/multi-upload" {params :multipart-params}
         (handle-multi-upload params)))

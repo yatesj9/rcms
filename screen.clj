@@ -1,20 +1,19 @@
 ;Start rcms server onport 8080
 (require '[rcms.repl :as rpl])
-(rpl/start-server)
+(rpl/start-server :test)
 
 (rpl/stop-server)
+
+(require '[rcms.routes.folders :reload true])
+
+(require '[rcms.models.folders :as flm :reload true])
+
+(require '[rcms.handler :reload true])
 
 (require '[cheshire.core :as cheshire])
 
 (require '[me.raynes.fs :as fs])
 
-(fs/directory? "resources/files/tests")
-
-(fs/mkdir "resources/files/tests")
-
-(fs/delete-dir "resources/files/tests")
-
-(fs/copy-dir "resources/files/tests" "resources/files/tests2")
 
 (def get-dir
      (fs/iterate-dir "resources/files"))
@@ -39,25 +38,18 @@ dir-names
   [seq elm]
   (some #(= elm %) seq))
 
-(first get-dir)
-
-get-dir
-
 (require '[rcms.tests.helper :refer [folder-schema
                                      folder-data] :reload true])
 
-(:table folder-schema)
-
-(:fields folder-schema)
-
 (require '[rcms.config :refer [set-mode!
-                               get-settings]])
+                               get-settings
+                               get-mode]])
 
 (require '[rcms.db :as sql :reload true])
 
-(do (set-mode! :test)
- (sql/set-connection! (sql/pooled-datasource (get-settings :database :connection))) )
+(get-mode)
 
+(sql/set-connection! (sql/pooled-datasource (get-settings :database :connection)))
 (sql/create-table! (sql/get-connection) (:table folder-schema) (:fields folder-schema))
 
 (sql/drop-table! (sql/get-connection) (:table folder-schema))
@@ -67,7 +59,6 @@ get-dir
 (sql/populate (sql/get-connection) :folders folder-data)
 
 (require '[clojure.java.jdbc :as sqlc])
-
 (sqlc/query (sql/get-connection) ["select * from folders"])
 
 ;Return millis
@@ -76,4 +67,6 @@ get-dir
 (def me-map [ {:id nil :name "henry"} {:id nil :name "bob"}  ])
 
 (map #(assoc %1 :id %2) me-map (range 1 10))
+
+(cheshire/generate-string {:name "Security" :resource "resources/files/security"})
 

@@ -11,6 +11,8 @@
   (reset! mode new-mode))
 
 (def ^:private tsettings {
+     :resource {
+      :path "resources/files/"}
      :database {
       :connection {
         :url "jdbc:h2:mem:testdb"

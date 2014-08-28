@@ -13,7 +13,8 @@
                                        folder-data]]
             [rcms.db :refer [drop-table!
                              create-table!
-                             populate]])
+                             populate]]
+            [rcms.config :refer [get-settings]])
   (:use [expectations :refer [expect]]))
 
 
@@ -25,35 +26,32 @@
         _ (create-table! c (:table folder-schema) (:fields folder-schema))
         _ (populate c :folders folder-data)]) )
 
-(def resource-path
-  "resources/files/tests")
 
 (defn clean-folders
   {:expectations-options :after-run}
   []
-  (do (remove-directory resource-path)
-      (remove-directory "resources/files/tests2")))
-
+  (do (remove-directory "test")
+      (remove-directory "tests2")))
 
 ;-------------------------------------------------------------------------------
 ; --- Direct Folder TESTS
 ;-------------------------------------------------------------------------------
 
 ;Create directory, return true
-(expect true (create-directory resource-path))
+(expect true (create-directory "tests"))
 
 ;Error if directory exists, return error
-(expect {:error "Directory already exists"} (create-directory resource-path))
+(expect {:error "Directory already exists"} (create-directory "tests"))
 
 ;Delete directory, return true
-(expect true (remove-directory resource-path))
+(expect true (remove-directory "tests"))
 
 ;Delete directory that does not exist, return error
-(expect {:error "Directory does not exist"} (remove-directory resource-path))
+(expect {:error "Directory does not exist"} (remove-directory "tests"))
 
 ;Create and Rename directory, than remove new named directory
-(expect true (create-directory resource-path))
-(expect true (rename-directory resource-path "resources/files/tests2"))
+(expect true (create-directory "tests"))
+(expect true (rename-directory "tests" "tests2"))
 
 
 ;-------------------------------------------------------------------------------
@@ -81,3 +79,5 @@
 (expect '(1) (rename-folder "TestFolder" "testfolder"))
 ;Return true for renamed folder
 (expect true (some #(= "testfolder" (:name %)) (get-folders)))
+
+

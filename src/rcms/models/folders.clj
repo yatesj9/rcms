@@ -1,7 +1,8 @@
 (ns rcms.models.folders
   (:require [me.raynes.fs :as fs]
             [rcms.db :as db]
-            [clojure.java.jdbc :as sql]))
+            [clojure.java.jdbc :as sql]
+            [rcms.config :refer [get-settings]]))
 
 ; --- Database folder manipulation---------------------------------------------
 
@@ -43,23 +44,26 @@
 (defn create-directory
   "Creates folder as path, ie resources/files/folder/##"
   [name]
-  (if (fs/directory? name)
+  (let [resource-path (get-settings :resource :path)]
+   (if (fs/directory? (str resource-path name))
     {:error "Directory already exists"}
-    (fs/mkdir name)))
+    (fs/mkdir (str resource-path name)))))
 
 (defn remove-directory
   "Deletes folder, ie resources/files/folder/##"
   [name]
-  (if (fs/directory? name)
-   (fs/delete-dir name)
-   {:error "Directory does not exist"}))
+  (let [resource-path (get-settings :resource :path)]
+   (if (fs/directory? (str resource-path name))
+   (fs/delete-dir (str resource-path name))
+   {:error "Directory does not exist"})))
 
 (defn rename-directory
   "Takes current folder path, renames to new path, ie resources/files/folder/##
       resources/files/folder/##_new"
   [name new-name]
-  (if (fs/directory? name)
+  (let [resource-path (get-settings :resource :path)]
+   (if (fs/directory? (str resource-path name))
     (do
-     (fs/copy-dir name new-name)
-     (fs/delete-dir name))
-    {:error "Directory does not exist"}))
+     (fs/copy-dir (str resource-path name) (str resource-path new-name))
+     (fs/delete-dir (str resource-path name)))
+    {:error "Directory does not exist"})))
