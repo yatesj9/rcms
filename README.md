@@ -9,7 +9,7 @@ Coming Soon, still in early stages
 ## Usage
 ---
 Coming Soon, still in early stages
-## TODO
+## To-Do/Tasks
 ---
 Routes/Model functions
 * Upload
@@ -56,7 +56,10 @@ Routes/Model functions
     * PUT
     * DELETE
 
-    
+Liberator - Resource management
+* Add
+* Configure
+
 Database Connection
 * ~~Bone connection pooling~~
 * ~~Create Tbl~~
@@ -70,6 +73,10 @@ Database Connection
 * Production - DB
 
 Authentication - Vault-API, *link to follow*
+
+API-KEY
+* Add
+* Remove
 
 Authorization - local/remote DB table
 * Upload permissions

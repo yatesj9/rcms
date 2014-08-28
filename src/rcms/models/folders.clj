@@ -12,6 +12,7 @@
   (sql/query (db/get-connection) ["select * from folders"]))
 
 (defn get-folder
+  "Return single folder record from DB"
   [name]
   (sql/query (db/get-connection) ["select * from folders where name = ?" name]))
 
@@ -28,6 +29,7 @@
   (sql/delete! (db/get-connection) :folders ["id = ?" folder-id]))
 
 (defn rename-folder
+  "Takes current folder name, new name"
   [folder-name new-name]
   (sql/update! (db/get-connection) :folders
                {:name new-name}
