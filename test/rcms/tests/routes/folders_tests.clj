@@ -1,15 +1,9 @@
 (ns rcms.tests.routes.folders-tests
   (:require [rcms.routes.folders :refer [folder-routes]]
             [cheshire.custom :refer [encode]])
-  (:use [expectations :refer [expect]]
+  (:use [midje.sweet ]
         [ring.mock.request :refer [request]]))
 
-
-(comment
- (expect {:status 201
-         :headers {"Content-Type" "text/plain"}
-         :body nil} (folder-routes (assoc (request :post "/folders")
-                           :params {"name" "test1" "resource" "resources/files/test1"}))) )
 
 
 

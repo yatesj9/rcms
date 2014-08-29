@@ -14,26 +14,31 @@
 (defn get-folder
   "Return single folder record from DB"
   [name]
-  (sql/query (db/get-connection) ["select * from folders where name = ?" name]))
+  (let [record (sql/query (db/get-connection)
+                          ["select * from folders where name = ?" name])]
+    (first record)))
 
 (defn add-folder
   "Add single folder to DB, takes a map {:name ###, :folder ###}"
   [folder-map]
   (let [folder-record (get-folder (:name folder-map))]
     (when (empty? folder-record)
-     (sql/insert! (db/get-connection) :folders folder-map))))
+     (sql/insert! (db/get-connection) :folders folder-map))
+    {:msg "Folder added"}))
 
 (defn remove-folder
   "Remove folder record from DB, takes folder-id"
   [id]
-  (sql/delete! (db/get-connection) :folders ["id = ?" id]))
+  (sql/delete! (db/get-connection) :folders ["id = ?" id])
+  {:msg "Folder removed"})
 
 (defn rename-folder
   "Takes current folder name, new name"
   [id new-name]
   (sql/update! (db/get-connection) :folders
                {:name new-name}
-               ["id = ?" id]))
+               ["id = ?" id])
+  {:msg "Folder renamed"})
 
 ; --- Direct folder manipulation-----------------------------------------------
 

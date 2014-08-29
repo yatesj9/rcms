@@ -29,7 +29,11 @@
   (fact "2 + 1 = 3"
    (+ 2 1) => 3))
 
-(facts "Facts about create, remove, rename directory"
+;-------------------------------------------------------------------------------
+; --- Database Directory TESTS
+;-------------------------------------------------------------------------------
+
+(facts "Facts about FILESYSTEM directories"
   (fact "Should create, error for existing, and remove"
     (create-directory "bob") => true
     (create-directory "bob") => {:error "Directory already exists"}
@@ -43,35 +47,31 @@
   (fact "Should get list of directorys"
     (create-directory "dir1")
     (create-directory "dir2")
-    (get-directories) => '("dir1","dir2")))
-
-
-
-(comment
+    (get-directories) => '("dir1","dir2")
+    (remove-directory "dir1")
+    (remove-directory "dir2")))
 
 ;-------------------------------------------------------------------------------
 ; --- Database Folder TESTS
 ;-------------------------------------------------------------------------------
 
-;Returns sequence of maps containg all folders in DB
-(expect (map #(assoc %1 :id %2) folder-data (range 1 3)) (get-folders))
+(facts "Facts about DATABASE folders"
+  (fact "Should return map of folders in DB"
+    (get-folders) => (map #(assoc %1 :id %2) folder-data (range 1 3)))
 
- ;Add new folder record to DB
-(expect true (seq? (add-folder {:id nil
-                                :name "TestFolder"
-                                :folder "testfolder"})) )
+  (fact "Should add new folder to DB"
+    (add-folder {:name "Folder 1" :folder "folder1"}) => {:msg "Folder added"}
+    (get-folders) => (map #(assoc %1 :id %2)
+                          (conj folder-data {:id nil
+                                        :name "Folder 1"
+                                        :folder "folder1"}) (range 1 4)))
 
-;Remove folder record from DB
-(expect '(1) (remove-folder 3))
+  (fact "Should remove the folder from DB, and verify"
+    (remove-folder 3) => {:msg "Folder removed"}
+    (get-folders) => (map #(assoc %1 :id %2) folder-data (range 1 3)))
 
-;Returns sequence of maps matching helper schema
-(expect (map #(assoc %1 :id %2) folder-data (range 1 3)) (get-folders))
-
-;Rename folder in DB, add record, rename, verify
-(expect true (seq? (add-folder { :name "TestFolder"
-                                :folder "testfolder"})) )
-
-(expect '(1) (rename-folder 1 "testfolder"))
-;Return true for renamed folder
-(expect true (some #(= "testfolder" (:name %)) (get-folders)))  )
-
+  (fact "Should rename current folder in DB"
+    (rename-folder 1 "PeoplePower") => {:msg "Folder renamed"}
+    (get-folder "PeoplePower") => {:id 1
+                                   :folder "people"
+                                   :name "PeoplePower"}))

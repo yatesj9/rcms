@@ -2,16 +2,18 @@
   (:require [rcms.config :refer [get-mode
                                  set-mode!
                                  get-settings]])
-  (:use [expectations :refer [expect]]))
+  (:use [midje.sweet]))
 
-;Return default mode
-;(expect :development (get-mode))
+(facts "Facts about setting and getting configs"
+  (fact "Should set mode"
+    (set-mode! :test) => :test)
 
-;Set and return DB settings for TEST, h2 DB
-(expect :test (set-mode! :test))
-(expect {:url "jdbc:h2:mem:testdb"
-         :min-connections 1
-         :max-connections 1
-         :partitions 1
-         :log-statements? true} (get-settings :database :connection))
-(expect :development (set-mode! :development))
+  (fact "Should return database connection information"
+    (get-settings :database :connection) => {:url "jdbc:h2:mem:testdb"
+                                             :min-connections 1
+                                             :max-connections 1
+                                             :partitions 1
+                                             :log-statements? true})
+
+  (fact "Should return resource path"
+    (get-settings :resource :path) => "resources/files/"))
