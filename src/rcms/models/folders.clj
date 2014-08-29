@@ -46,10 +46,10 @@
 (defn create-directory
   "Creates folder path in config"
   [name]
-  (let [resource-path (get-settings :resource :path)]
-   (if (fs/directory? (str resource-path name))
+  (let [folder (str (get-settings :resource :path) name)]
+   (if (fs/directory? folder)
     {:error "Directory already exists"}
-    (fs/mkdir (str resource-path name)))))
+    (fs/mkdir folder))))
 
 (defn remove-directory
   "Deletes folder, at path in config"
@@ -62,7 +62,7 @@
 (defn rename-directory
   "Takes map {:current-name ## :new-name ##}"
   [name-map]
-  (let [resource-path (get-settings :resource :path)]
+  (let [resource-path "resources/files/"]
    (if (fs/directory? (str resource-path (:current-name name)))
     (do
      (fs/copy-dir (str resource-path (:current-name name-map))

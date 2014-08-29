@@ -4,18 +4,12 @@
 
 (rpl/stop-server)
 
-(require '[rcms.routes.folders :reload true])
+;Tests-------------------------------------------------------------------------
 
-(require '[rcms.models.folders :as flm :reload true])
+(require '[rcms.models.folders :reload true]
+         '[rcms.tests.models.folders-tests :reload true])
 
-(require '[rcms.handler :reload true])
-
-(require '[cheshire.core :as cheshire])
-
-(require '[me.raynes.fs :as fs])
-
-(require '[rcms.routes.uploads :reload true])
-
+;------------------------------------------------------------------------------
 (def get-dir
      (fs/iterate-dir "resources/files"))
 
@@ -41,11 +35,15 @@ dir-names
 
 (require '[rcms.tests.helper :refer [folder-schema
                                      folder-data] :reload true])
+
 (require '[rcms.config :refer [set-mode!
                                get-settings
                                get-mode]])
+
 (require '[rcms.db :as sql :reload true])
+
 (get-mode)
+
 (sql/set-connection! (sql/pooled-datasource (get-settings :database :connection)))
 (sql/create-table! (sql/get-connection) (:table folder-schema) (:fields folder-schema))
 

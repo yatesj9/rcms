@@ -14,44 +14,40 @@
             [rcms.db :refer [drop-table!
                              create-table!
                              populate]]
-            [rcms.config :refer [get-settings]])
-  (:use [expectations :refer [expect]]))
+            [rcms.config :refer [get-settings
+                                 set-mode!]])
+  (:use [midje.sweet]))
 
-
-(defn initialize-db
-  {:expectations-options :before-run}
-  []
-  (let [c (initialize-test-connection)
+(def initialize-db
+  (do (set-mode! :test)
+   (let [c (initialize-test-connection)
         - (drop-table! c (:table folder-schema))
         _ (create-table! c (:table folder-schema) (:fields folder-schema))
-        _ (populate c :folders folder-data)]) )
+        _ (populate c :folders folder-data)])))
+
+(facts "Facts about adding"
+  (fact "2 + 1 = 3"
+   (+ 2 1) => 3))
+
+(facts "Facts about create, remove, rename directory"
+  (fact "Should create, error for existing, and remove"
+    (create-directory "bob") => true
+    (create-directory "bob") => {:error "Directory already exists"}
+    (remove-directory "bob") => true)
+
+  (fact "Should create, rename and remove"
+    (create-directory "rename_test") => true
+    (rename-directory {:current-name "rename_test" :new-name "rename"}) => true
+    (remove-directory "rename") => true)
+
+  (fact "Should get list of directorys"
+    (create-directory "dir1")
+    (create-directory "dir2")
+    (get-directories) => '("dir1","dir2")))
 
 
-(defn clean-folders
-  {:expectations-options :after-run}
-  []
-  (do (remove-directory "test")
-      (remove-directory "tests2")))
 
-;-------------------------------------------------------------------------------
-; --- Direct Folder TESTS
-;-------------------------------------------------------------------------------
-
-;Create directory, return true
-(expect true (create-directory "tests"))
-
-;Error if directory exists, return error
-(expect {:error "Directory already exists"} (create-directory "tests"))
-
-;Delete directory, return true
-(expect true (remove-directory "tests"))
-
-;Delete directory that does not exist, return error
-(expect {:error "Directory does not exist"} (remove-directory "tests"))
-
-;Create and Rename directory, than remove new named directory
-(expect true (create-directory "tests"))
-(expect true (rename-directory {:current-name "tests" :new-name "tests2"}))
+(comment
 
 ;-------------------------------------------------------------------------------
 ; --- Database Folder TESTS
@@ -60,7 +56,7 @@
 ;Returns sequence of maps containg all folders in DB
 (expect (map #(assoc %1 :id %2) folder-data (range 1 3)) (get-folders))
 
-;Add new folder record to DB
+ ;Add new folder record to DB
 (expect true (seq? (add-folder {:id nil
                                 :name "TestFolder"
                                 :folder "testfolder"})) )
@@ -77,4 +73,5 @@
 
 (expect '(1) (rename-folder 1 "testfolder"))
 ;Return true for renamed folder
-(expect true (some #(= "testfolder" (:name %)) (get-folders)))
+(expect true (some #(= "testfolder" (:name %)) (get-folders)))  )
+

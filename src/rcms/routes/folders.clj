@@ -1,5 +1,5 @@
 (ns rcms.routes.folders
-  (:require [compojure.core :refer [defroutes ANY GET POST PUT DELETE]]
+  (:require [compojure.core :refer [defroutes ANY]]
             [rcms.models.folders :as fl]
             [liberator.core :refer [resource]]
             [cheshire.custom :refer (encode)]))

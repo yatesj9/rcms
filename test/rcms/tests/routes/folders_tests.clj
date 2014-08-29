@@ -4,9 +4,6 @@
   (:use [expectations :refer [expect]]
         [ring.mock.request :refer [request]]))
 
-; --- GET returns json map of all foders in db
-(expect 200  (-> (folder-routes (request :get "/folders"))
-               :status))
 
 (comment
  (expect {:status 201
