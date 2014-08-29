@@ -27,7 +27,7 @@ Routes/Model functions
     * GET
         * ~~Get list of folder from path~~
         * ~~Get single folder from DB~~
-        * Get list of folder's from DB        
+        * ~~Get list of folder's from DB~~
         * Validation
     * POST
         * ~~Create~~
@@ -36,11 +36,13 @@ Routes/Model functions
         * Validation
     * PUT
         * ~~Rename~~
-        * Change DB table
+        * ~~Change DB table~~
+            * NOT WORKING FOR FILESYSTEM
         * Validation
     * DELETE
         * ~~Remove~~
         * ~~Remove from DB table~~
+        * ~~Remove from filessystem~~
         * Validation
 * Files
     * GET
@@ -57,8 +59,7 @@ Routes/Model functions
     * DELETE
 
 Liberator - Resource management
-* Add
-* Configure
+* ~~Add~~
 
 Database Connection
 * ~~Bone connection pooling~~

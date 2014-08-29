@@ -51,8 +51,7 @@
 
 ;Create and Rename directory, than remove new named directory
 (expect true (create-directory "tests"))
-(expect true (rename-directory "tests" "tests2"))
-
+(expect true (rename-directory {:current-name "tests" :new-name "tests2"}))
 
 ;-------------------------------------------------------------------------------
 ; --- Database Folder TESTS
@@ -64,20 +63,18 @@
 ;Add new folder record to DB
 (expect true (seq? (add-folder {:id nil
                                 :name "TestFolder"
-                                :resource "resources/files/testfolder"})) )
+                                :folder "testfolder"})) )
 
 ;Remove folder record from DB
-(expect '(1) (remove-folder 3))
+(expect '(1) (remove-folder "testfolder"))
 
 ;Returns sequence of maps matching helper schema
 (expect (map #(assoc %1 :id %2) folder-data (range 1 3)) (get-folders))
 
 ;Rename folder in DB, add record, rename, verify
-(expect true (seq? (add-folder {:id nil
-                                :name "TestFolder"
-                                :resource "resources/files/testfolder"})) )
+(expect true (seq? (add-folder { :name "TestFolder"
+                                :folder "testfolder"})) )
+
 (expect '(1) (rename-folder "TestFolder" "testfolder"))
 ;Return true for renamed folder
 (expect true (some #(= "testfolder" (:name %)) (get-folders)))
-
-

@@ -70,3 +70,4 @@ dir-names
 
 (cheshire/generate-string {:name "Security" :resource "resources/files/security"})
 
+(flm/add-folder {:id nil :name "Bob" :folder "bob2"})

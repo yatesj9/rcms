@@ -17,7 +17,7 @@
   (sql/query (db/get-connection) ["select * from folders where name = ?" name]))
 
 (defn add-folder
-  "Add single folder to DB, takes a map {:id nil, :name ###, :resource ###"
+  "Add single folder to DB, takes a map {:name ###, :folder ###}"
   [folder-map]
   (let [folder-record (get-folder (:name folder-map))]
     (when (empty? folder-record)
@@ -25,8 +25,8 @@
 
 (defn remove-folder
   "Remove folder record from DB, takes folder-id"
-  [folder-id]
-  (sql/delete! (db/get-connection) :folders ["id = ?" folder-id]))
+  [folder]
+  (sql/delete! (db/get-connection) :folders ["folder = ?" folder]))
 
 (defn rename-folder
   "Takes current folder name, new name"
@@ -40,11 +40,11 @@
 (defn get-directories
   "Returns list of directories on disk"
   []
-  (let [dir-seq (fs/iterate-dir "resources/files")]
+  (let [dir-seq (fs/iterate-dir (str (get-settings :resource :path)))]
    (map #(str %) (get (first dir-seq) 1))))
 
 (defn create-directory
-  "Creates folder as path, ie resources/files/folder/##"
+  "Creates folder path in config"
   [name]
   (let [resource-path (get-settings :resource :path)]
    (if (fs/directory? (str resource-path name))
@@ -52,7 +52,7 @@
     (fs/mkdir (str resource-path name)))))
 
 (defn remove-directory
-  "Deletes folder, ie resources/files/folder/##"
+  "Deletes folder, at path in config"
   [name]
   (let [resource-path (get-settings :resource :path)]
    (if (fs/directory? (str resource-path name))
@@ -60,12 +60,12 @@
    {:error "Directory does not exist"})))
 
 (defn rename-directory
-  "Takes current folder path, renames to new path, ie resources/files/folder/##
-      resources/files/folder/##_new"
-  [name new-name]
+  "Takes map {:current-name ## :new-name ##}"
+  [name-map]
   (let [resource-path (get-settings :resource :path)]
-   (if (fs/directory? (str resource-path name))
+   (if (fs/directory? (str resource-path (:current-name name)))
     (do
-     (fs/copy-dir (str resource-path name) (str resource-path new-name))
-     (fs/delete-dir (str resource-path name)))
+     (fs/copy-dir (str resource-path (:current-name name-map))
+                  (str resource-path (:new-name name-map)))
+     (fs/delete-dir (str resource-path (:current-name name-map))))
     {:error "Directory does not exist"})))

@@ -22,15 +22,15 @@
   {:table :folders
     :fields ["id int not null auto_increment,
               name varchar(50) not null,
-              resource varchar(50) not null"]})
+              folder varchar(50) not null"]})
 
 (def folder-data
   [{:id nil
     :name "People"
-    :resource "resources/files/people"}
+    :folder "people"}
    {:id nil
     :name "Smoke Signals"
-    :resource "resources/files/smokesignals"}])
+    :folder "smokesignals"}])
 
 ; --- Files Table--------------------------------------------------------------
 
