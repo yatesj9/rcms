@@ -14,6 +14,7 @@
 
 (require '[me.raynes.fs :as fs])
 
+(require '[rcms.routes.uploads :reload true])
 
 (def get-dir
      (fs/iterate-dir "resources/files"))
@@ -40,15 +41,11 @@ dir-names
 
 (require '[rcms.tests.helper :refer [folder-schema
                                      folder-data] :reload true])
-
 (require '[rcms.config :refer [set-mode!
                                get-settings
                                get-mode]])
-
 (require '[rcms.db :as sql :reload true])
-
 (get-mode)
-
 (sql/set-connection! (sql/pooled-datasource (get-settings :database :connection)))
 (sql/create-table! (sql/get-connection) (:table folder-schema) (:fields folder-schema))
 
@@ -71,3 +68,10 @@ dir-names
 (cheshire/generate-string {:name "Security" :resource "resources/files/security"})
 
 (flm/add-folder {:id nil :name "Bob" :folder "bob2"})
+
+(def my-vec
+  [{:size 1576, :tempfile "tmp", :content-type "text/html" , :filename "Decrypt"}
+   {:size 601707, :tempfile "tmp", :content-type "image/png", :filename "IOS"}])
+
+
+(map #(str %) my-vec)

@@ -25,15 +25,15 @@
 
 (defn remove-folder
   "Remove folder record from DB, takes folder-id"
-  [folder]
-  (sql/delete! (db/get-connection) :folders ["folder = ?" folder]))
+  [id]
+  (sql/delete! (db/get-connection) :folders ["id = ?" id]))
 
 (defn rename-folder
   "Takes current folder name, new name"
-  [folder-name new-name]
+  [id new-name]
   (sql/update! (db/get-connection) :folders
                {:name new-name}
-               ["name = ?" folder-name]))
+               ["id = ?" id]))
 
 ; --- Direct folder manipulation-----------------------------------------------
 

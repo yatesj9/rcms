@@ -14,11 +14,13 @@ Coming Soon, still in early stages
 Routes/Model functions
 * Upload
     * ~~Single Upload~~
+        * ~~POST~~ 
         * Add to DB table
         * Folder selection
         * Tag selection
         * Validation  
     * Multi Upload
+        * ~~POST~~ 
         * Add to DB table   
         * Folder selection
         * Tag selection

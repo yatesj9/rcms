@@ -66,7 +66,7 @@
                                 :folder "testfolder"})) )
 
 ;Remove folder record from DB
-(expect '(1) (remove-folder "testfolder"))
+(expect '(1) (remove-folder 3))
 
 ;Returns sequence of maps matching helper schema
 (expect (map #(assoc %1 :id %2) folder-data (range 1 3)) (get-folders))
@@ -75,6 +75,6 @@
 (expect true (seq? (add-folder { :name "TestFolder"
                                 :folder "testfolder"})) )
 
-(expect '(1) (rename-folder "TestFolder" "testfolder"))
+(expect '(1) (rename-folder 1 "testfolder"))
 ;Return true for renamed folder
 (expect true (some #(= "testfolder" (:name %)) (get-folders)))

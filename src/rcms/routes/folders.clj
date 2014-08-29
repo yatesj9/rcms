@@ -1,13 +1,8 @@
 (ns rcms.routes.folders
   (:require [compojure.core :refer [defroutes ANY GET POST PUT DELETE]]
             [rcms.models.folders :as fl]
-            [liberator.core :refer [resource request-method-in]]
+            [liberator.core :refer [resource]]
             [cheshire.custom :refer (encode)]))
-
-(defn test-get-handler
-  []
-  {:status 200
-   :body "Test-Handler"})
 
 (def ^:private folders-resource
   (resource
@@ -16,11 +11,6 @@
     :post! (fn [{{:keys [params]}:request}]
                (do (fl/add-folder params)
                  (fl/create-directory (:folder params))))
-    :put! (fn [{{:keys [params]}:request}]
-              (do (fl/rename-folder (:name params)
-                                    (:new-name params)
-                                    (str "resources/files/" (:new-name params)))
-                (println params)))
     :delete! (fn [{{:keys [params]}:request}]
                  (do (fl/remove-folder (:folder params))
                    (fl/remove-directory (:folder params))))
