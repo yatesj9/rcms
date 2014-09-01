@@ -60,11 +60,10 @@
     (get-folders) => (map #(assoc %1 :id %2) folder-data (range 1 3)))
 
   (fact "Should add new folder to DB"
-    (add-folder {:name "Folder 1" :folder "folder1"}) => {:msg "Folder added"}
+    (add-folder {:name "Folder 1"}) => {:msg "Folder added"}
     (get-folders) => (map #(assoc %1 :id %2)
                           (conj folder-data {:id nil
-                                        :name "Folder 1"
-                                        :folder "folder1"}) (range 1 4)))
+                                        :name "Folder 1"}) (range 1 4)))
 
   (fact "Should remove the folder from DB, and verify"
     (remove-folder 3) => {:msg "Folder removed"}
@@ -73,6 +72,5 @@
   (fact "Should rename current folder in DB"
     (rename-folder 1 "PeoplePower") => {:msg "Folder renamed"}
     (get-folder "PeoplePower") => {:id 1
-                                   :folder "people"
                                    :name "PeoplePower"}
     (rename-folder 1 "People")))

@@ -10,13 +10,13 @@
     :allowed-methods [:get :post :put :delete]
     :post! (fn [{{:keys [params]}:request}]
                (do (fl/add-folder params)
-                 (fl/create-directory (:folder params))))
+                 (fl/create-directory (:name params))))
     :put! (fn [{{:keys [params]}:request}]
               (do (fl/rename-folder (:id params) (:new-name params))
                 (fl/rename-directory params)))
     :delete! (fn [{{:keys [params]}:request}]
                  (do (fl/remove-folder (:id params))
-                   (fl/remove-directory (:folder params))))
+                   (fl/remove-directory (:name params))))
     :handle-ok (fn [{{:keys [route-params]}:request}]
                    (do (let [folder-name (fl/get-folder (:name route-params))]
                          (if folder-name

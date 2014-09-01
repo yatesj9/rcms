@@ -9,6 +9,23 @@ Coming Soon, still in early stages
 ## Usage
 ---
 Coming Soon, still in early stages
+
+Upload
+```clojure
+POST   /upload       {:file {:size '##' :tempfile #<File > :filename '######'}}
+POST   /multi-upload [{:file {:size '##' :tempfile #<File > :filename '######'}
+                             {:size '##' :tempfile #<File > :filename '######'}}]
+```
+
+Folders
+```clojure
+GET    /folders
+POST   /folders          {:name 'foldername'}
+PUT    /folders/{folder} {:id '##' :current-name 'foldername' :new-name 'foldername'}
+DLEETE /folders/{folder} {:id '##' :name 'foldername'}
+```
+
+
 ## To-Do/Tasks
 ---
 Routes/Model functions
@@ -30,6 +47,7 @@ Routes/Model functions
         * ~~Get list of folder from path~~
         * ~~Get single folder from DB~~
         * ~~Get list of folder's from DB~~
+        * ~~Get single folder from DB~~
         * Validation
     * POST
         * ~~Create~~
@@ -39,7 +57,7 @@ Routes/Model functions
     * PUT
         * ~~Rename~~
         * ~~Change DB table~~
-            * NOT WORKING FOR FILESYSTEM
+        * ~~Change filesystem folder~~
         * Validation
     * DELETE
         * ~~Remove~~
@@ -71,7 +89,7 @@ Database Connection
     * ~~H2 DB~~
     * ~~Initialization~~
     * ~~Schema~~
-    * Fixtures
+    * ~~Fixtures~~
 * Development - DB
 * Production - DB
 

@@ -97,7 +97,7 @@ Single Map of folder
 {:headers {'Content-Type: application/json'
 	       'Accept: application/json'
 		   'client-api-token: GUID'}
- :body {:name "Folder Name" :folder 'folderName'}
+ :body {:name "Folder Name"}
 ```
 
 ## Resource
@@ -137,7 +137,7 @@ Single Map of folder
 {:headers {'Content-Type: application/json'
 	       'Accept: application/json'
 		   'client-api-token: GUID'}
- :body {:id '##' :folder 'folderName'}
+ :body {:id '##' :name 'folderName'}
 ```
 
 ## Resource

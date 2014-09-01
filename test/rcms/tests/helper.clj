@@ -21,16 +21,13 @@
 (def folder-schema
   {:table :folders
     :fields ["id int not null auto_increment,
-              name varchar(50) not null,
-              folder varchar(50) not null"]})
+              name varchar(50) not null"]})
 
 (def folder-data
   [{:id nil
-    :name "People"
-    :folder "people"}
+    :name "People"}
    {:id nil
-    :name "Smoke Signals"
-    :folder "smokesignals"}])
+    :name "Smoke Signals"}])
 
 ; --- Files Table--------------------------------------------------------------
 
