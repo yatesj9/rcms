@@ -17,8 +17,11 @@
     :delete! (fn [{{:keys [params]}:request}]
                  (do (fl/remove-folder (:id params))
                    (fl/remove-directory (:folder params))))
-    :handle-ok (fn [_]
-                   (fl/get-folders))))
+    :handle-ok (fn [{{:keys [route-params]}:request}]
+                   (do (let [folder-name (fl/get-folder (:name route-params))]
+                         (if folder-name
+                           folder-name
+                           (fl/get-folders)))))))
 
 (defn folders
   [{params :params :as request}]
@@ -26,4 +29,5 @@
       folders-resource))
 
 (defroutes folder-routes
-  (ANY "/folders" request (folders request)))
+  (ANY "/folders" request (folders request))
+  (ANY "/folders/:name" request (folders request)))

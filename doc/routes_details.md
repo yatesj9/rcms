@@ -17,7 +17,8 @@ application/x-javascript, :filename ######}}}
 		201 Created {:headers {'Content-Type: application/json'}}
 	
 	//Invalid - missing client-api-token
-		401 Unauthorized {}
+        401 Unauthorized {:headers {'Content-Type: text/palin'}
+                          :body {"client-request-token is missing or invalid"}
 		
 ---
 # Uploading Multiple Documents
@@ -43,7 +44,8 @@ application/x-javascript, :filename ######}}]
 		201 Created {:headers {'Content-Type: application/json'}}
 	
 	//Invalid - missing client-api-token
-		401 Unauthorized {}
+        401 Unauthorized {:headers {'Content-Type: text/palin'}
+                          :body {"client-request-token is missing or invalid"}
 
 ---
 # Folders
@@ -62,9 +64,32 @@ List/Vector of folders
 
 ## Response
     //Valid response
-    
+        200 OK {:headers {'Content-Type: application/json'}
+                :body [VECTOR OF MAPS]
     //Invalid - missing client-api-token
+        401 Unauthorized {:headers {'Content-Type: text/palin'}
+                          :body {"client-request-token is missing or invalid"}
     
+---
+### GET /folders/{folder}
+## Request
+```clojure
+{:headers {'client-api-token: GUID'}}
+```
+
+## Resource
+Single Map of folder
+```clojure
+{:id '##' :name 'foldername' :folder 'foldername'}
+```
+
+## Response
+    //Valid response
+        200 OK {:headers {'Content-Type: application/json'}
+                :body {MAP OF FOLDER}
+    //Invalid - missing client-api-token
+        401 Unauthorized {:headers {'Content-Type: text/palin'}
+                          :body {"client-request-token is missing or invalid"} 
 ---
 ### POST /folders
 ## Request
@@ -72,7 +97,7 @@ List/Vector of folders
 {:headers {'Content-Type: application/json'
 	       'Accept: application/json'
 		   'client-api-token: GUID'}
- :body {:folder 'folderName'}
+ :body {:name "Folder Name" :folder 'folderName'}
 ```
 
 ## Resource
@@ -83,6 +108,8 @@ List/Vector of folders
         201 Created {:headers {'Content-Type: application/json'}}
     
     //Invalid - missing client-api-token
+        401 Unauthorized {:headers {'Content-Type: text/palin'}
+                          :body {"client-request-token is missing or invalid"}
 ---
 ### PUT /folders/{folder}
 ## Request
@@ -90,7 +117,7 @@ List/Vector of folders
 {:headers {'Content-Type: application/json'
 	       'Accept: application/json'
 		   'client-api-token: GUID'}
- :body {:folder 'folderName'}
+ :body {:id '##' :current-name "Folder Name" :new-name "New folder name"}
 ```
 
 ## Resource
@@ -101,6 +128,8 @@ List/Vector of folders
         201 Created {:headers {'Content-Type: application/json'}}
     
     //Invalid - missing client-api-token
+        401 Unauthorized {:headers {'Content-Type: text/palin'}
+                          :body {"client-request-token is missing or invalid"}
 ---
 ### DELETE /folders/{folder}
 ## Request
@@ -108,7 +137,7 @@ List/Vector of folders
 {:headers {'Content-Type: application/json'
 	       'Accept: application/json'
 		   'client-api-token: GUID'}
- :body {:folder 'folderName'}
+ :body {:id '##' :folder 'folderName'}
 ```
 
 ## Resource
@@ -119,3 +148,5 @@ List/Vector of folders
         201 Created {:headers {'Content-Type: application/json'}}
     
     //Invalid - missing client-api-token
+        401 Unauthorized {:headers {'Content-Type: text/palin'}
+                          :body {"client-request-token is missing or invalid"}
