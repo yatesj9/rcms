@@ -34,19 +34,24 @@
 (def file-schema
   {:table :files
    :fields ["id int not null auto_increment,
-             file_id varchar(50) not null
-             file_name varchar(50) not null
-             description varchar(50) not null
+             folder_name varchar(50) not null,
+             file_name varchar(50) not null,
+             description varchar(50) not null,
              updated_at bigint not null"]})
 
 (def file-data
   [{:id nil
-    :file_id "GUID"
+    :folder_name "People"
     :file_name "my_mash.jpg"
     :description "A bunch of cool pictures mached together"
     :updated_at (System/currentTimeMillis)}
    {:id nil
-    :file_id "GUID"
+    :folder_name "Smoke Signals"
     :file_name "passwords.txt"
     :description "Super secret passwords"
+    :updated_at (System/currentTimeMillis)}
+   {:id nil
+    :folder_name "Smoke Signals"
+    :file_name "secret.doc"
+    :description "Super secret documents"
     :updated_at (System/currentTimeMillis)}])

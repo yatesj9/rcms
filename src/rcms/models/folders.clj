@@ -72,5 +72,6 @@
     (do
      (fs/copy-dir (str resource-path (:current-name name-map))
                   (str resource-path (:new-name name-map)))
-     (fs/delete-dir (str resource-path (:current-name name-map))))
+     (if (fs/directory? (str resource-path (:current-name name-map)))
+      (fs/delete-dir (str resource-path (:current-name name-map)))))
     {:error "Directory does not exist"})))

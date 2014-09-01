@@ -25,6 +25,10 @@ PUT    /folders/{folder} {:id '##' :current-name 'foldername' :new-name 'foldern
 DLEETE /folders/{folder} {:id '##' :name 'foldername'}
 ```
 
+Files
+```clojure
+GET    /files
+```
 
 ## To-Do/Tasks
 ---
