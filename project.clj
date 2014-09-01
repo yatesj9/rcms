@@ -6,7 +6,6 @@
                  [hiccup "1.0.5"]
                  [ring-server "0.3.1"]
                  [lib-noir "0.8.6"]
-                 [expectations "2.0.9"]
                  [me.raynes/fs "1.4.6"]
                  [log4j/log4j "1.2.17"]
                  [org.slf4j/slf4j-log4j12 "1.7.7"]
@@ -17,7 +16,8 @@
                  [cheshire "5.3.1"]
                  [ring/ring-json "0.3.1"]
                  [liberator "0.12.1"]
-                 [midje "1.6.3"]]
+                 [midje "1.6.3"]
+                 [ring-middleware-format "0.4.0"]]
   :plugins [[lein-ring "0.8.10"]
             [lein-autoexpect "1.2.2"]]
   :ring {:handler rcms.handler/app

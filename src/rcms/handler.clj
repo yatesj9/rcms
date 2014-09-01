@@ -4,6 +4,7 @@
             [ring.middleware.file-info :refer [wrap-file-info]]
             [ring.middleware.json :refer [wrap-json-response
                                           wrap-json-params]]
+            [ring.middleware.format :refer [wrap-restful-format]]
             [hiccup.middleware :refer [wrap-base-url]]
             [compojure.handler :as handler]
             [compojure.route :as route]
@@ -24,4 +25,4 @@
   (-> (routes upload-routes folder-routes app-routes)
       (handler/site)
       (wrap-json-response)
-      (wrap-json-params)))
+      (wrap-restful-format)))

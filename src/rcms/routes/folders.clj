@@ -11,11 +11,14 @@
     :post! (fn [{{:keys [params]}:request}]
                (do (fl/add-folder params)
                  (fl/create-directory (:folder params))))
+    :put! (fn [{{:keys [params]}:request}]
+              (do (fl/rename-folder (:id params) (:new-name params))
+                (fl/rename-directory params)))
     :delete! (fn [{{:keys [params]}:request}]
-                 (do (fl/remove-folder (:folder params))
+                 (do (fl/remove-folder (:id params))
                    (fl/remove-directory (:folder params))))
     :handle-ok (fn [_]
-                   (encode (fl/get-folders)))))
+                   (fl/get-folders))))
 
 (defn folders
   [{params :params :as request}]

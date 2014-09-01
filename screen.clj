@@ -4,6 +4,8 @@
 
 (rpl/stop-server)
 
+(require '[rcms.routes.folders :reload true])
+
 ;Tests-------------------------------------------------------------------------
 
 (require '[rcms.models.folders :reload true]
@@ -35,11 +37,9 @@ dir-names
 
 (require '[rcms.tests.helper :refer [folder-schema
                                      folder-data] :reload true])
-
 (require '[rcms.config :refer [set-mode!
                                get-settings
                                get-mode]])
-
 (require '[rcms.db :as sql :reload true])
 
 (get-mode)

@@ -74,4 +74,5 @@
     (rename-folder 1 "PeoplePower") => {:msg "Folder renamed"}
     (get-folder "PeoplePower") => {:id 1
                                    :folder "people"
-                                   :name "PeoplePower"}))
+                                   :name "PeoplePower"}
+    (rename-folder 1 "People")))

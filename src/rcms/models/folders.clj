@@ -67,7 +67,7 @@
 (defn rename-directory
   "Takes map {:current-name ## :new-name ##}"
   [name-map]
-  (let [resource-path "resources/files/"]
+  (let [resource-path (get-settings :resource :path)]
    (if (fs/directory? (str resource-path (:current-name name)))
     (do
      (fs/copy-dir (str resource-path (:current-name name-map))
