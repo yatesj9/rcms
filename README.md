@@ -29,6 +29,7 @@ Files
 ```clojure
 GET    /files
 GET    /files/{folder}
+GET    /files/{folder}/{filename}
 DELETE /files/{folder}/{filename}
 ```
 
@@ -91,8 +92,10 @@ Routes/Model functions
     * ~~Get all files from folder in DB~~
     * ~~Save file to DB~~
     * ~~Remove file from DB~~
-    * GET
-    * DELETE
+    * ~~GET single~~
+    * ~~GET all~~
+    * ~~GET all from folder~~
+    * ~~DELETE~~
 * Tags
     * GET
     * POST
