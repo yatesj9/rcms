@@ -66,11 +66,11 @@
                                         :name "Folder 1"}) (range 1 4)))
 
   (fact "Should remove the folder from DB, and verify"
-    (remove-folder 3) => {:msg "Folder removed"}
+    (remove-folder "Folder 1") => {:msg "Folder removed"}
     (get-folders) => (map #(assoc %1 :id %2) folder-data (range 1 3)))
 
   (fact "Should rename current folder in DB"
-    (rename-folder 1 "PeoplePower") => {:msg "Folder renamed"}
+    (rename-folder "People" "PeoplePower") => {:msg "Folder renamed"}
     (get-folder "PeoplePower") => {:id 1
                                    :name "PeoplePower"}
-    (rename-folder 1 "People")))
+    (rename-folder "PeoplePower" "People")))

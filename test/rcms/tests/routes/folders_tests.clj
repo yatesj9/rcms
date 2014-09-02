@@ -22,12 +22,11 @@
     => 201)
 
   (fact "PUT - Should return status of 201"
-    (:status (folder-routes (assoc (request :put "/folders/posttest")
-                          :params {:id 4 :current-name "Post test" :new-name "posttestnew"})))
+    (:status (folder-routes (assoc (request :put "/folders/Post%20test")
+                          :params {:new-name "posttestnew"})))
     => 201)
 
   (fact "DELETE - Should return status of 204"
-    (:status (folder-routes (assoc (request :delete "/folders/posttestnew")
-                                  :params {:id 4 :folder "posttestnew"})))
+    (:status (folder-routes (request :delete "/folders/posttestnew")))
     => 204))
 

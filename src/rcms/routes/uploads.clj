@@ -3,7 +3,8 @@
             [noir.io :refer [upload-file]]
             [liberator.core :refer [resource]]
             [noir.response :refer [redirect]]
-            [rcms.config :refer [get-settings]]))
+            [rcms.config :refer [get-settings]]
+            [rcms.models.files :refer [save-file]]))
 
 (defn resource-path
   "Returns path fron settings, adds folder if supplied"
@@ -22,7 +23,8 @@
         :allowed-methods [:post :get]
         :available-media-types ["application/json"]
         :post! (fn [{{:keys [params]}:request}]
-                   (handle-upload (:folder params) (:file params)))
+                   (do (handle-upload (:folder params) (:file params)))
+                         )
         :handle-created (fn [{{:keys [params]}:request}]
                             (:filename (:file params)))))
 

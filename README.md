@@ -21,13 +21,15 @@ Folders
 ```clojure
 GET    /folders
 POST   /folders          {:name 'foldername'}
-PUT    /folders/{folder} {:id '##' :current-name 'foldername' :new-name 'foldername'}
-DLEETE /folders/{folder} {:id '##' :name 'foldername'}
+PUT    /folders/{folder} {:new-name 'foldername'}
+DELETE /folders/{folder} 
 ```
 
 Files
 ```clojure
 GET    /files
+GET    /files/{folder}
+DELETE /files/{folder}/{filename}
 ```
 
 ## To-Do/Tasks
@@ -69,6 +71,9 @@ Routes/Model functions
         * ~~Remove from filessystem~~
         * Validation
 * Files
+    * ~~Get single file from DB~~
+    * ~~Get all files from folder in DB~~
+    * ~~Save file to DB~~
     * GET
     * DELETE
 * Links

@@ -1,7 +1,8 @@
 (ns rcms.tests.models.files-tests
   (:require [rcms.models.files :refer [get-files
                                        get-file
-                                       save-file]]
+                                       save-file
+                                       remove-file]]
             [rcms.tests.helper :refer [initialize-test-connection
                                        file-schema
                                        file-data]]
@@ -42,4 +43,8 @@
     (dissoc (first (get-file "testing.pdf")) :updated_at :id)
       => {:description "File test"
           :file_name "testing.pdf"
-          :folder_name "People"}))
+          :folder_name "People"})
+
+  (fact "Should remove file from db"
+    (remove-file 4) => {:msg "File removed"}
+    (get-file "testing.pdf") => '()))

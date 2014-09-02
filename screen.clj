@@ -74,12 +74,3 @@ dir-names
 
 (map #(str %) my-vec)
 
-(require '[camel-snake-kebab.core :refer :all])
-
-(use 'camel-snake-kebab.core)
-
-(defn map-keys [f m]
-    (letfn [(mapper [[k v]] [(f k) (if (map? v) (map-keys f v) v)])]
-               (into {} (map mapper m))))
-
-(->snake_case {:bob_h "hi"})
