@@ -24,7 +24,9 @@
         :available-media-types ["application/json"]
         :post! (fn [{{:keys [params]}:request}]
                    (do (handle-upload (:folder params) (:file params)))
-                         )
+                       (save-file {:folder-name (:folder params)
+                                   :file-name (:filename (:file params))
+                                   :description (:description params)}))
         :handle-created (fn [{{:keys [params]}:request}]
                             (:filename (:file params)))))
 
@@ -34,7 +36,10 @@
          :available-media-types ["application/json"]
          :post! (fn [{{:keys [params]}:request}]
                     (doseq [x (:file params)]
-                             (handle-upload (:folder params) x)))
+                             (handle-upload (:folder params) x)
+                             (save-file {:folder-name (:folder params)
+                                         :file-name (:filename x)
+                                         :description (:description params)})))
          :handle-created (fn [{{:keys [params]}:request}]
                              (map #(:filename %) (:file params)))))
 (defn upload

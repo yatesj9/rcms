@@ -13,7 +13,8 @@
                      (:filename route-params)(fl/get-file (:filename route-params))
                      :else (fl/get-all-files)))
     :delete! (fn [{{:keys [route-params]}:request}]
-                 (fl/remove-file (:filename route-params)))))
+                 (do (fl/remove-file (:filename route-params))
+                  (fl/delete-file (:folder route-params) (:filename route-params))))))
 
 (defn files
   [request]

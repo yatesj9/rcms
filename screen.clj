@@ -12,6 +12,10 @@
          '[rcms.tests.models.folders-tests :reload true])
 
 ;------------------------------------------------------------------------------
+(require '[me.raynes.fs :as fs])
+
+(fs/delete "resources/files/IT/chips.jpeg")
+
 (def get-dir
      (fs/iterate-dir "resources/files"))
 
@@ -36,7 +40,8 @@ dir-names
   (some #(= elm %) seq))
 
 (require '[rcms.tests.helper :refer [folder-schema
-                                     folder-data] :reload true])
+                                     folder-data
+                                     file-schema] :reload true])
 (require '[rcms.config :refer [set-mode!
                                get-settings
                                get-mode]])
@@ -46,15 +51,16 @@ dir-names
 
 (sql/set-connection! (sql/pooled-datasource (get-settings :database :connection)))
 (sql/create-table! (sql/get-connection) (:table folder-schema) (:fields folder-schema))
+(sql/create-table! (sql/get-connection) (:table file-schema) (:fields file-schema))
 
-(sql/drop-table! (sql/get-connection) (:table folder-schema))
+(sql/drop-table! (sql/get-connection) (:table file-schema))
 
 (sql/get-connection)
 
 (sql/populate (sql/get-connection) :folders folder-data)
 
 (require '[clojure.java.jdbc :as sqlc])
-(sqlc/query (sql/get-connection) ["select * from folders"])
+(sqlc/query (sql/get-connection) ["select * from files"])
 
 ;Return millis
 (System/currentTimeMillis)

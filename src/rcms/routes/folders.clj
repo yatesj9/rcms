@@ -18,10 +18,9 @@
                  (do (fl/remove-folder (:name route-params))
                    (fl/remove-directory (:name route-params))))
     :handle-ok (fn [{{:keys [route-params]}:request}]
-                   (do (let [folder-name (fl/get-folder (:name route-params))]
-                         (if folder-name
-                           folder-name
-                           (fl/get-folders)))))))
+                   (cond
+                     (:name route-params) (fl/get-folder (:name route-params))
+                     :else (fl/get-folders)))))
 
 (defn folders
   [{params :params :as request}]

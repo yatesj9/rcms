@@ -2,7 +2,8 @@
   (:require [rcms.db :as db]
             [clojure.java.jdbc :as sql]
             [rcms.config :refer [get-settings]]
-            [rcms.common :refer [kebab->snake]]))
+            [rcms.common :refer [kebab->snake]]
+            [me.raynes.fs :as fs]))
 
 (defn get-all-files
   "Return vector of all files in db"
@@ -37,3 +38,9 @@
   [name]
   (sql/delete! (db/get-connection) :files ["file_name = ?" name])
   {:msg "File removed"})
+
+(defn delete-file
+  "Deletes file from filesystem"
+  [folder name]
+  (when (fs/file? (str (get-settings :resource :path) folder "/" name))
+   (fs/delete (str (get-settings :resource :path) folder "/" name))))
