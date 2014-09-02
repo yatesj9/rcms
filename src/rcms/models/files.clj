@@ -34,7 +34,6 @@
 
 (defn remove-file
   "Removes file from DB"
-  [id]
-  (sql/delete! (db/get-connection) :files ["id = ?" id])
+  [name]
+  (sql/delete! (db/get-connection) :files ["file_name = ?" name])
   {:msg "File removed"})
-

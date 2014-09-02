@@ -30,7 +30,7 @@
    :description "File test"})
 
 (facts "Facts about files"
-  (fact "Return files from folder id 1"
+  (fact "Return files from folder name People"
     (map #(dissoc %  :description :updated_at ) (get-files "People"))
     => '({:file_name "my_mash.jpg" :folder_name "People" :id 1}))
 
@@ -46,5 +46,5 @@
           :folder_name "People"})
 
   (fact "Should remove file from db"
-    (remove-file 4) => {:msg "File removed"}
+    (remove-file "testing.pdf") => {:msg "File removed"}
     (get-file "testing.pdf") => '()))

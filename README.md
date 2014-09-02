@@ -32,6 +32,22 @@ GET    /files/{folder}
 DELETE /files/{folder}/{filename}
 ```
 
+Tags
+```clojure
+GET    /tags
+POST   /tags       {:name 'tagname'}
+PUT    /tags/{tag} {:new-name 'tagname'}
+DELETE /tags/{tag} 
+```
+
+Links
+```clojure
+GET    /links
+POST   /links        {:name 'linkname' :href 'linkhref'}
+PUT    /links/{name} {:new-name 'linkname' :new-href 'linkhref'}
+DELETE /links/{name}
+```
+
 ## To-Do/Tasks
 ---
 Routes/Model functions
@@ -74,14 +90,15 @@ Routes/Model functions
     * ~~Get single file from DB~~
     * ~~Get all files from folder in DB~~
     * ~~Save file to DB~~
+    * ~~Remove file from DB~~
     * GET
     * DELETE
-* Links
+* Tags
     * GET
     * POST
     * PUT
     * DELETE
-* Tags
+* Links
     * GET
     * POST
     * PUT

@@ -117,7 +117,7 @@ Single Map of folder
 {:headers {'Content-Type: application/json'
 	       'Accept: application/json'
 		   'client-api-token: GUID'}
- :body {:id '##' :current-name "Folder Name" :new-name "New folder name"}
+ :body {:new-name "New folder name"}
 ```
 
 ## Resource
@@ -137,7 +137,6 @@ Single Map of folder
 {:headers {'Content-Type: application/json'
 	       'Accept: application/json'
 		   'client-api-token: GUID'}
- :body {:id '##' :name 'folderName'}
 ```
 
 ## Resource
