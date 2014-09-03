@@ -1,7 +1,9 @@
 (ns rcms.tests.models.tags-tests
   (:require [rcms.models.tags :refer [get-all-tags
                                       get-folder-tags
-                                      save-tag]]
+                                      save-tag
+                                      get-folder-tag-name
+                                      remove-tag]]
             [rcms.tests.helper :refer [initialize-test-connection
                                        tag-schema
                                        tag-data]]
@@ -45,4 +47,7 @@
   (fact "Should save tag to db"
     (save-tag new-tag)
     (dissoc (first (get-folder-tag-name new-tag)) :id) => {:folder_name "People"
-                                                           :name "Aug 2014"}))
+                                                           :name "Aug 2014"})
+
+  (fact "Should remove tag from db"
+    (remove-tag "Aug 2014") => {:msg "Tag removed"}))

@@ -43,9 +43,9 @@ DELETE /files/{folder}/{filename}
 Tags
 ```clojure
 GET    /tags
-POST   /tags       {:name 'tagname'}
-PUT    /tags/{tag} {:new-name 'tagname'}
-DELETE /tags/{tag} 
+GET    /tags/{folder}
+POST   /tags          {:name 'tagname' :folder-name 'foldername'}
+DELETE /tags/{folder}/{tag}
 ```
 
 Links
@@ -63,14 +63,14 @@ Routes/Model functions
     * ~~Single Upload~~
         * ~~POST~~ 
         * ~~Add to DB table~~
-        * Folder selection
-        * Tag selection
+        * ~~Folder selection~~
+        * ~~Tag selection~~
         * Validation  
     * Multi Upload
         * ~~POST~~ 
         * ~~Add to DB table~~   
-        * Folder selection
-        * Tag selection
+        * ~~Folder selection~~
+        * ~~Tag selection~~
         * Validation  
 * Folders
     * GET
@@ -109,9 +109,13 @@ Routes/Model functions
     * ~~Get specific tag name and folder~~
     * ~~Save tag to DB~~
     * GET
+    	* ~~All tags~~
+        * ~~Single tag matching folder~~
+        * ~~All tags from folder~~
     * POST
-    * PUT
+        * ~~Add tag~~ 
     * DELETE
+        * ~~Remove tag~~ 
 * Links
     * GET
     * POST
@@ -162,8 +166,8 @@ DB
     * updated_at
 * Tags
     * id
+    * name
     * folder_name
-    * tag_name
 
 ## Documentation
 ---

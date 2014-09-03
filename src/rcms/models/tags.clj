@@ -31,3 +31,8 @@
       (sql/update! (db/get-connection) :tags
                                        tag
                                        ["name = ?" (:name tag-map)]))))
+
+(defn remove-tag
+  [tag-name]
+  (sql/delete! (db/get-connection) :tags ["name = ?" tag-name])
+  {:msg "Tag removed"})

@@ -25,17 +25,17 @@
 	** Tags **
 	
 	GET     /tags                       - Get all tags
+	GET     /tags/{folder}              - Get all tags from folder
 	POST    /tags                       - Add new tag
-	PUT     /tags/{tag}                 - Update tag
-	DELETE  /tags/{tag}                 - Delete tag
-
+	DELETE  /tags/{folder}/{tag}        - Delete tag
+	
 	** Links **
 	
 	GET     /links                      - Get all links
 	POST    /links                      - Add new link
 	PUT     /links/{name}               - Update link
 	DELETE  /links/{name}               - Delete link
-	
+
 
 ### Authentication Routes - Vault-API
 

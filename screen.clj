@@ -41,7 +41,8 @@ dir-names
 
 (require '[rcms.tests.helper :refer [folder-schema
                                      folder-data
-                                     file-schema] :reload true])
+                                     file-schema
+                                     tag-schema] :reload true])
 (require '[rcms.config :refer [set-mode!
                                get-settings
                                get-mode]])
@@ -52,6 +53,7 @@ dir-names
 (sql/set-connection! (sql/pooled-datasource (get-settings :database :connection)))
 (sql/create-table! (sql/get-connection) (:table folder-schema) (:fields folder-schema))
 (sql/create-table! (sql/get-connection) (:table file-schema) (:fields file-schema))
+(sql/create-table! (sql/get-connection) (:table tag-schema) (:fileds tag-schema))
 
 (sql/drop-table! (sql/get-connection) (:table file-schema))
 
@@ -71,16 +73,3 @@ dir-names
 
 (cheshire/generate-string {:name "Security" :resource "resources/files/security"})
 
-(flm/add-folder {:id nil :name "Bob" :folder "bob2"})
-
-(def my-vec
-  [{:size 1576, :tempfile "tmp", :content-type "text/html" , :filename "Decrypt"}
-   {:size 601707, :tempfile "tmp", :content-type "image/png", :filename "IOS"}])
-
-
-(map #(str %) my-vec)
-
-(def tags
-     (str "Jan 2014;July 2015"))
-
-(into [] (map #(clojure.string/trim % )(clojure.string/split tags #";")))

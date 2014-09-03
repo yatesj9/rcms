@@ -10,7 +10,8 @@
             [compojure.route :as route]
             [rcms.routes.uploads :refer [upload-routes]]
             [rcms.routes.folders :refer [folder-routes]]
-            [rcms.routes.files :refer [file-routes]]))
+            [rcms.routes.files :refer [file-routes]]
+            [rcms.routes.tags :refer [tag-routes]]))
 
 (defn init []
   (println "rcms is starting"))
@@ -23,7 +24,11 @@
   (route/not-found "Not Found"))
 
 (def app
-  (-> (routes upload-routes folder-routes file-routes app-routes)
+  (-> (routes upload-routes
+              folder-routes
+              file-routes
+              tag-routes
+              app-routes)
       (handler/site)
       (wrap-json-response)
       (wrap-restful-format)))
