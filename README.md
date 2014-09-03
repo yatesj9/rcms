@@ -14,11 +14,13 @@ Upload
 ```clojure
 POST   /upload       {:file {:size '##' :tempfile #<File > :filename '######'}
                       :folder "foldername"
-                      :description "file description"}
+                      :description "file description"
+                      :tag "tagname"}
 POST   /multi-upload [{:file {:size '##' :tempfile #<File > :filename '######'}
                              {:size '##' :tempfile #<File > :filename '######'}
                        :folder "foldername"
-                       :description "file description"}]
+                       :description "file description"
+                       :tag "tagname"}]
         NOTE: Folder and Description is applied to all files in multi-upload
 ```
 
@@ -102,6 +104,10 @@ Routes/Model functions
     * ~~GET all from folder~~
     * ~~DELETE~~
 * Tags
+    * ~~Get all tags~~
+    * ~~Get all tags from folder~~
+    * ~~Get specific tag name and folder~~
+    * ~~Save tag to DB~~
     * GET
     * POST
     * PUT
@@ -142,6 +148,22 @@ Authorization - local/remote DB table
     * Allowed users
 * Link permissions
 
+
+DB
+* Folders
+    * id 
+    * name 
+* Files
+    * id
+    * folder_name
+    * file_name
+    * description
+    * tags
+    * updated_at
+* Tags
+    * id
+    * folder_name
+    * tag_name
 
 ## Documentation
 ---

@@ -80,3 +80,7 @@ dir-names
 
 (map #(str %) my-vec)
 
+(def tags
+     (str "Jan 2014;July 2015"))
+
+(into [] (map #(clojure.string/trim % )(clojure.string/split tags #";")))

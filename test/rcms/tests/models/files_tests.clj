@@ -32,18 +32,19 @@
 (facts "Facts about files"
   (fact "Return files from folder name People"
     (map #(dissoc %  :description :updated_at ) (get-files "People"))
-    => '({:file_name "my_mash.jpg" :folder_name "People" :id 1}))
+    => '({:file_name "my_mash.jpg" :folder_name "People" :id 1 :tag nil}))
 
   (fact "Should return single file using name"
     (dissoc (first (get-file "my_mash.jpg"))  :description :updated_at)
-      =>  {:file_name "my_mash.jpg" :folder_name "People" :id 1})
+      =>  {:file_name "my_mash.jpg" :folder_name "People" :id 1 :tag nil})
 
   (fact "Should save file to DB"
     (save-file new-file)
     (dissoc (first (get-file "testing.pdf")) :updated_at :id)
       => {:description "File test"
           :file_name "testing.pdf"
-          :folder_name "People"})
+          :folder_name "People"
+          :tag nil})
 
   (fact "Should remove file from db"
     (remove-file "testing.pdf") => {:msg "File removed"}
