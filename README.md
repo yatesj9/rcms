@@ -44,7 +44,7 @@ Tags
 ```clojure
 GET    /tags
 GET    /tags/{folder}
-POST   /tags          {:name 'tagname' :folder-name 'foldername'}
+POST   /tags                {:name 'tagname' :folder-name 'foldername'}
 DELETE /tags/{folder}/{tag}
 ```
 

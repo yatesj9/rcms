@@ -3,7 +3,7 @@
             [rcms.config :refer [set-mode!
                                  get-settings]]))
 
-; --- Init Test DB connection--------------------------------------------------
+; --- Init Test DB connection---------------------------------------------------
 (defonce connection (atom nil))
 
 (defn initialize-test-connection
@@ -29,7 +29,7 @@
    {:id nil
     :name "Smoke Signals"}])
 
-; --- Files Table--------------------------------------------------------------
+; --- Files Table---------------------------------------------------------------
 
 (def file-schema
   {:table :files
@@ -78,3 +78,22 @@
    {:id nil
     :name "Policies"
     :folder_name "People"}])
+
+; --- Links Table---------------------------------------------------------------
+
+(def link-schema
+  {:table :links
+   :fields ["id int not null auto_increment,
+             name varchar(50) not null,
+             href varchar(100) not null"]})
+
+(def link-data
+  [{:id nil
+    :name "Google"
+    :href "http://google.com"}
+   {:id nil
+    :name "rcms"
+    :href "https://github.com/yatesj9/rcms"}
+   {:id nil
+    :name "GameSpot"
+    :href "http://www.gamespot.com"}])
