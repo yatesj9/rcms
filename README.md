@@ -12,9 +12,14 @@ Coming Soon, still in early stages
 
 Upload
 ```clojure
-POST   /upload       {:file {:size '##' :tempfile #<File > :filename '######'}}
+POST   /upload       {:file {:size '##' :tempfile #<File > :filename '######'}
+                      :folder "foldername"
+                      :description "file description"}
 POST   /multi-upload [{:file {:size '##' :tempfile #<File > :filename '######'}
-                             {:size '##' :tempfile #<File > :filename '######'}}]
+                             {:size '##' :tempfile #<File > :filename '######'}
+                       :folder "foldername"
+                       :description "file description"}]
+        NOTE: Folder and Description is applied to all files in multi-upload
 ```
 
 Folders
@@ -55,13 +60,13 @@ Routes/Model functions
 * Upload
     * ~~Single Upload~~
         * ~~POST~~ 
-        * Add to DB table
+        * ~~Add to DB table~~
         * Folder selection
         * Tag selection
         * Validation  
     * Multi Upload
         * ~~POST~~ 
-        * Add to DB table   
+        * ~~Add to DB table~~   
         * Folder selection
         * Tag selection
         * Validation  

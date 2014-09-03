@@ -59,7 +59,7 @@ application/x-javascript, :filename ######}}]
 ## Resource
 List/Vector of folders
 ```clojure
-[]
+[VECTOR OF MAPS]
 ```
 
 ## Response

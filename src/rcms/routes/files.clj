@@ -10,7 +10,6 @@
     :handle-ok (fn [{{:keys [params route-params]}:request}]
                    (cond
                      (:folder route-params) (fl/get-files (:folder route-params))
-                     (:filename route-params)(fl/get-file (:filename route-params))
                      :else (fl/get-all-files)))
     :delete! (fn [{{:keys [route-params]}:request}]
                  (do (fl/remove-file (:filename route-params))
