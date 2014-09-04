@@ -15,7 +15,7 @@
   (sql/query (db/get-connection) ["select * from links where name = ?" link-name]))
 
 (defn save-link
-  "Takes link-map, saves to DB or updates by Name"
+  "Takes link-map, saves to DB or updates by Name {:name '###' :href '###'}"
   [link-map]
   (let [link (-> link-map
                  (kebab->snake))

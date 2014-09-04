@@ -52,7 +52,6 @@ Links
 ```clojure
 GET    /links
 POST   /links        {:name 'linkname' :href 'linkhref'}
-PUT    /links/{name} {:new-name 'linkname' :new-href 'linkhref'}
 DELETE /links/{name}
 ```
 
@@ -117,10 +116,14 @@ Routes/Model functions
     * DELETE
         * ~~Remove tag~~ 
 * Links
+    * ~~Get all links~~
+    * ~~Save links~~
     * GET
+        * ~~All links~~ 
     * POST
-    * PUT
+        * ~~Add single link~~ 
     * DELETE
+        * ~~Delete link~~ 
 
 Liberator - Resource management
 * ~~Add~~
@@ -168,6 +171,9 @@ DB
     * id
     * name
     * folder_name
+* Links
+    * id
+    * name
 
 ## Documentation
 ---

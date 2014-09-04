@@ -53,7 +53,7 @@ dir-names
 (sql/set-connection! (sql/pooled-datasource (get-settings :database :connection)))
 (sql/create-table! (sql/get-connection) (:table folder-schema) (:fields folder-schema))
 (sql/create-table! (sql/get-connection) (:table file-schema) (:fields file-schema))
-(sql/create-table! (sql/get-connection) (:table tag-schema) (:fileds tag-schema))
+(sql/create-table! (sql/get-connection) (:table tag-schema) (:fields tag-schema))
 
 (sql/drop-table! (sql/get-connection) (:table file-schema))
 
@@ -62,7 +62,7 @@ dir-names
 (sql/populate (sql/get-connection) :folders folder-data)
 
 (require '[clojure.java.jdbc :as sqlc])
-(sqlc/query (sql/get-connection) ["select * from files"])
+(sqlc/query (sql/get-connection) ["select * from tags"])
 
 ;Return millis
 (System/currentTimeMillis)
