@@ -14,14 +14,12 @@ Upload
 ```clojure
 POST   /upload       {:file {:size '##' :tempfile #<File > :filename '######'}
                       :folder "foldername"
-                      :description "file description"
                       :tag "tagname"}
 POST   /multi-upload [{:file {:size '##' :tempfile #<File > :filename '######'}
                              {:size '##' :tempfile #<File > :filename '######'}
                        :folder "foldername"
-                       :description "file description"
                        :tag "tagname"}]
-        NOTE: Folder and Description is applied to all files in multi-upload
+        NOTE: Folder and tag is applied to all files in multi-upload
 ```
 
 Folders
@@ -164,7 +162,6 @@ DB
     * id
     * folder_name
     * file_name
-    * description
     * tags
     * updated_at
 * Tags

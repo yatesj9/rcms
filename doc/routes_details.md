@@ -80,7 +80,7 @@ List/Vector of folders
 ## Resource
 Single Map of folder
 ```clojure
-{:id '##' :name 'foldername' :folder 'foldername'}
+{:id '##' :name 'foldername'}
 ```
 
 ## Response

@@ -26,8 +26,7 @@
 
 (def new-file
   {:folder-name "People"
-   :file-name "testing.pdf"
-   :description "File test"})
+   :file-name "testing.pdf"})
 
 (facts "Facts about files"
   (fact "Return files from folder name People"
@@ -41,8 +40,7 @@
   (fact "Should save file to DB"
     (save-file new-file)
     (dissoc (first (get-file "testing.pdf")) :updated_at :id)
-      => {:description "File test"
-          :file_name "testing.pdf"
+      => {:file_name "testing.pdf"
           :folder_name "People"
           :tag nil})
 
