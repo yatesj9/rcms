@@ -26,7 +26,7 @@ Folders
 ```clojure
 GET    /folders
 POST   /folders          {:name 'foldername'}
-PUT    /folders/{folder} {:new-name 'foldername'}
+PUT    /folders/{folder} {:newName 'foldername'}
 DELETE /folders/{folder} 
 ```
 
@@ -42,7 +42,7 @@ Tags
 ```clojure
 GET    /tags
 GET    /tags/{folder}
-POST   /tags                {:name 'tagname' :folder-name 'foldername'}
+POST   /tags                {:name 'tagname' :folderName 'foldername'}
 DELETE /tags/{folder}/{tag}
 ```
 
@@ -51,6 +51,12 @@ Links
 GET    /links
 POST   /links        {:name 'linkname' :href 'linkhref'}
 DELETE /links/{name}
+```
+
+Authorization
+```clojure
+GET    /users
+POST   /users/tokens {:token 'token' :id 'id'}
 ```
 
 ## To-Do/Tasks
@@ -171,6 +177,12 @@ DB
 * Links
     * id
     * name
+* Permissions
+    * id
+    * employee_id
+    * section
+    * folders
+    * admin
 
 ## Documentation
 ---

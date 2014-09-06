@@ -21,8 +21,22 @@
         :partitions 1
         :log-statements? true}}})
 
+(def ^:private dsettings {
+     :resource {
+      :path "resources/files/"}
+     :database {
+      :connecton {
+        :url "jdbc:sqlserver://ts58;databaseName=crewview"
+        :username "crewview"
+        :password "crewview"
+        :min-connections 1
+        :max-connections 1
+        :partitions 1
+        :log-statements? true}}})
+
 (def opts {
-  :test tsettings})
+  :test tsettings
+  :development dsettings})
 
 (defn get-settings
   [& selections]

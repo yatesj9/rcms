@@ -8,8 +8,30 @@
 
 ;Tests-------------------------------------------------------------------------
 
+(require '[rcms.routes.uploads :reload true]
+         '[rcms.tests.routes.uploads-tests :reload true])
+
 (require '[rcms.models.folders :reload true]
-         '[rcms.tests.models.folders-tests :reload true])
+         '[rcms.routes.folders :reload true]
+         '[rcms.tests.models.folders-tests :reload true]
+         '[rcms.tests.routes.folders-tests :reload true])
+
+(require '[rcms.models.files :reload true]
+         '[rcms.routes.files :reload true]
+         '[rcms.tests.models.files-tests :reload true]
+         '[rcms.tests.routes.files-tests :reload true])
+
+(require '[rcms.models.tags :reload true]
+         '[rcms.routes.tags :reload true]
+         '[rcms.tests.models.tags-tests :reload true]
+         '[rcms.tests.routes.tags-tests :reload true])
+
+(require '[rcms.models.links :reload true]
+         '[rcms.routes.links :reload true]
+         '[rcms.tests.models.links-tests :reload true]
+         '[rcms.tests.routes.links-tests :reload true])
+
+(ln/get-links)
 
 ;------------------------------------------------------------------------------
 (require '[me.raynes.fs :as fs])

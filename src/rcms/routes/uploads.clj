@@ -26,7 +26,6 @@
                    (do (handle-upload (:folder params) (:file params)))
                        (save-file {:folder-name (:folder params)
                                    :file-name (:filename (:file params))
-                                   :description (:description params)
                                    :tag (:tag params)}))
         :handle-created (fn [{{:keys [params]}:request}]
                             (:filename (:file params)))))
@@ -40,7 +39,6 @@
                              (handle-upload (:folder params) x)
                              (save-file {:folder-name (:folder params)
                                          :file-name (:filename x)
-                                         :description (:description params)
                                          :tag (:tag params)})))
          :handle-created (fn [{{:keys [params]}:request}]
                              (map #(:filename %) (:file params)))))
