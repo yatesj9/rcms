@@ -4,7 +4,11 @@
 (def ^:private json-clojure
      {:folderName :folder-name
       :fileName :file-name
-      :newName :new-name})
+      :newName :new-name
+      :updatedAt :updated-at
+      :employeeId :employee-id
+      :folderOrder :folder-order
+      :linksOrder :links-order})
 
 (defn- json->clojure
   [map]

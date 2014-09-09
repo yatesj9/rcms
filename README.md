@@ -25,7 +25,7 @@ POST   /multi-upload [{:file {:size '##' :tempfile #<File > :filename '######'}
 Folders
 ```clojure
 GET    /folders
-POST   /folders          {:name 'foldername'}
+POST   /folders          {:name 'foldername' :folderOrder '#'}
 PUT    /folders/{folder} {:newName 'foldername'}
 DELETE /folders/{folder} 
 ```
@@ -49,7 +49,7 @@ DELETE /tags/{folder}/{tag}
 Links
 ```clojure
 GET    /links
-POST   /links        {:name 'linkname' :href 'linkhref'}
+POST   /links        {:name 'linkname' :href 'linkhref' :linksOrder '#'}
 DELETE /links/{name}
 ```
 
@@ -163,13 +163,15 @@ Authorization - local/remote DB table
 DB
 * Folders
     * id 
-    * name 
+    * name
+    * folder_order
 * Files
     * id
     * folder_name
     * file_name
     * tags
     * updated_at
+    * links_order
 * Tags
     * id
     * name
@@ -180,7 +182,7 @@ DB
 * Permissions
     * id
     * employee_id
-    * section
+    * section ie.Documents/Links/Announcements/Banner/Image-links
     * folders
     * admin
 

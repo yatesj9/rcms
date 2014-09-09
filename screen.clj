@@ -1,12 +1,15 @@
-;Start rcms server onport 8080
+;-------------------------------------------------------------------------------
+;Start rcms server on port 8080
+;-------------------------------------------------------------------------------
+
 (require '[rcms.repl :as rpl])
 (rpl/start-server :test)
 
 (rpl/stop-server)
 
-(require '[rcms.routes.folders :reload true])
-
-;Tests-------------------------------------------------------------------------
+;-------------------------------------------------------------------------------
+;Tests
+;-------------------------------------------------------------------------------
 
 (require '[rcms.routes.uploads :reload true]
          '[rcms.tests.routes.uploads-tests :reload true])
@@ -31,9 +34,49 @@
          '[rcms.tests.models.links-tests :reload true]
          '[rcms.tests.routes.links-tests :reload true])
 
-(ln/get-links)
+;-------------------------------------------------------------------------------
+;Database
+;-------------------------------------------------------------------------------
 
-;------------------------------------------------------------------------------
+(require '[rcms.tests.helper :refer [folder-schema
+                                     folder-data
+                                     file-schema
+                                     file-data
+                                     tag-schema
+                                     tag-data
+                                     link-schema
+                                     link-data] :reload true])
+(require '[rcms.config :refer [set-mode!
+                               get-settings
+                               get-mode]])
+(require '[rcms.db :as sql :reload true])
+
+;Set connection and create tables
+(sql/set-connection! (sql/pooled-datasource (get-settings :database :connection)))
+(sql/create-table! (sql/get-connection) (:table folder-schema) (:fields folder-schema))
+(sql/create-table! (sql/get-connection) (:table file-schema) (:fields file-schema))
+(sql/create-table! (sql/get-connection) (:table tag-schema) (:fields tag-schema))
+(sql/create-table! (sql/get-connection) (:table link-schema) (:fields link-schema))
+
+;Drop tables
+(sql/drop-table! (sql/get-connection) (:table folder-schema))
+(sql/drop-table! (sql/get-connection) (:table file-schema))
+(sql/drop-table! (sql/get-connection) (:table tag-schema))
+(sql/drop-table! (sql/get-connection) (:table link-schema))
+
+;Pre-populate with fixture data
+(sql/populate (sql/get-connection) :folders folder-data)
+(sql/populate (sql/get-connection) :files file-data)
+(sql/populate (sql/get-connection) :tags tag-data)
+(sql/populate (sql/get-connection) :links link-data)
+
+(require '[clojure.java.jdbc :as sqlc])
+(sqlc/query (sql/get-connection) ["select * from folders"])
+
+;-------------------------------------------------------------------------------
+;Misc
+;-------------------------------------------------------------------------------
+
 (require '[me.raynes.fs :as fs])
 
 (fs/delete "resources/files/IT/chips.jpeg")
@@ -61,31 +104,6 @@ dir-names
   [seq elm]
   (some #(= elm %) seq))
 
-(require '[rcms.tests.helper :refer [folder-schema
-                                     folder-data
-                                     file-schema
-                                     tag-schema] :reload true])
-(require '[rcms.config :refer [set-mode!
-                               get-settings
-                               get-mode]])
-(require '[rcms.db :as sql :reload true])
-
-(get-mode)
-
-(sql/set-connection! (sql/pooled-datasource (get-settings :database :connection)))
-(sql/create-table! (sql/get-connection) (:table folder-schema) (:fields folder-schema))
-(sql/create-table! (sql/get-connection) (:table file-schema) (:fields file-schema))
-(sql/create-table! (sql/get-connection) (:table tag-schema) (:fields tag-schema))
-
-(sql/drop-table! (sql/get-connection) (:table file-schema))
-
-(sql/get-connection)
-
-(sql/populate (sql/get-connection) :folders folder-data)
-
-(require '[clojure.java.jdbc :as sqlc])
-(sqlc/query (sql/get-connection) ["select * from tags"])
-
 ;Return millis
 (System/currentTimeMillis)
 
@@ -94,4 +112,3 @@ dir-names
 (map #(assoc %1 :id %2) me-map (range 1 10))
 
 (cheshire/generate-string {:name "Security" :resource "resources/files/security"})
-

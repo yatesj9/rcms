@@ -21,13 +21,16 @@
 (def folder-schema
   {:table :folders
     :fields ["id int not null auto_increment,
-              name varchar(50) not null"]})
+              name varchar(50) not null,
+              folder_order int"]})
 
 (def folder-data
   [{:id nil
-    :name "People"}
+    :name "People"
+    :folder_order 2}
    {:id nil
-    :name "Smoke Signals"}])
+    :name "Smoke Signals"
+    :folder_order 1}])
 
 ; --- Files Table---------------------------------------------------------------
 
@@ -81,15 +84,19 @@
   {:table :links
    :fields ["id int not null auto_increment,
              name varchar(50) not null,
-             href varchar(100) not null"]})
+             href varchar(100) not null,
+             links_order int"]})
 
 (def link-data
   [{:id nil
     :name "Google"
-    :href "http://google.com"}
+    :href "http://google.com"
+    :links_order 2}
    {:id nil
     :name "rcms"
-    :href "https://github.com/yatesj9/rcms"}
+    :href "https://github.com/yatesj9/rcms"
+    :links_order 3}
    {:id nil
     :name "GameSpot"
-    :href "http://www.gamespot.com"}])
+    :href "http://www.gamespot.com"
+    :links_order 1}])

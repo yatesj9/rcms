@@ -4,7 +4,11 @@
 (def ^:private kebab->snake-replacements
      {:file-name :file_name
       :folder-name :folder_name
-      :updated-at :updated_at})
+      :new-name :new_name
+      :updated-at :updated_at
+      :employee-id :employee_id
+      :folder-order :folder_order
+      :links-order :links_order})
 
 (defn kebab->snake
   [snake-case-map]
