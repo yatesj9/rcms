@@ -49,7 +49,7 @@ DELETE /tags/{folder}/{tag}
 Links
 ```clojure
 GET    /links
-POST   /links        {:name 'linkname' :href 'linkhref' :linksOrder '#'}
+POST   /links        {:name 'linkname' :href 'linkhref' :linkOrder '#'}
 DELETE /links/{name}
 ```
 
@@ -171,7 +171,7 @@ DB
     * file_name
     * tags
     * updated_at
-    * links_order
+    * link_order
 * Tags
     * id
     * name

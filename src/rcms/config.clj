@@ -23,9 +23,9 @@
 
 (def ^:private dsettings {
      :resource {
-      :path "resources/files/"}
+      :path "/mnt/crewview"}
      :database {
-      :connecton {
+      :connection {
         :url "jdbc:sqlserver://ts58;databaseName=crewview"
         :username "crewview"
         :password "crewview"

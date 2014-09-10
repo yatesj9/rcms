@@ -13,6 +13,7 @@
                  [org.clojure/java.jdbc "0.3.5"]
                  [com.jolbox/bonecp "0.8.0.RELEASE"]
                  [com.h2database/h2 "1.4.181"]
+                 [com.microsoft/sqljdbc4 "3.0"]
                  [cheshire "5.3.1"]
                  [ring/ring-json "0.3.1"]
                  [liberator "0.12.1"]

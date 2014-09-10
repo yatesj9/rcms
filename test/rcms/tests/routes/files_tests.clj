@@ -18,10 +18,6 @@
      (decode (:body (app (request :get "/files/People"))) true)
      => (fl/get-files "People"))
 
-  (fact "GET - Should return single file map"
-    (decode (:body (app (request :get "/files/People/my_mash.jpg"))) true)
-    => (fl/get-file "my_mash.jpg"))
-
   (fact "DELETE - Should delete file from DB"
     (:status (app (request :delete "/files/People/my_mash.jpg")))
     => 204))

@@ -1,5 +1,7 @@
 (ns rcms.repl
-  (:require [rcms.config :refer [set-mode!]])
+  (:require [rcms.config :refer [set-mode!
+                                 get-settings]]
+            [rcms.db :as sql])
   (:use rcms.handler
         ring.server.standalone
         [ring.middleware file-info file]))
@@ -22,6 +24,7 @@
   [mode & [port]]
   (let [port (if port (Integer/parseInt port) 8080)]
     (do (set-mode! mode)
+         (sql/set-connection! (sql/pooled-datasource (get-settings :database :connection)))
     (reset! server
             (serve (get-handler)
                    {:port port

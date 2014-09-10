@@ -2,7 +2,8 @@
   (:require [me.raynes.fs :as fs]
             [rcms.db :as db]
             [clojure.java.jdbc :as sql]
-            [rcms.config :refer [get-settings]]))
+            [rcms.config :refer [get-settings]]
+            [rcms.common :refer [kebab->snake]]))
 
 ; --- Database folder manipulation---------------------------------------------
 
@@ -23,7 +24,7 @@
   [folder-map]
   (let [folder-record (get-folder (:name folder-map))]
     (when (empty? folder-record)
-     (sql/insert! (db/get-connection) :folders folder-map))
+     (sql/insert! (db/get-connection) :folders (kebab->snake folder-map)))
     {:msg "Folder added"}))
 
 (defn remove-folder

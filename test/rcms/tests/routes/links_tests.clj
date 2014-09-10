@@ -18,7 +18,7 @@
     (app (assoc (request :post "/links")
                         :params {:name "crew" :href "http://crew.casinorama.com"}))
     (dissoc (last (ln/get-links)) :id)
-      => {:name "crew" :href "http://crew.casinorama.com" :links_order nil})
+      => {:name "crew" :href "http://crew.casinorama.com" :link_order nil})
 
   (fact "DELETE - Should remove link from db"
     (app (request :delete "/links/crew"))

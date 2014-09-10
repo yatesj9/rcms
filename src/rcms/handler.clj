@@ -29,6 +29,7 @@
               tag-routes
               link-routes
               app-routes)
+      (wrap-file-info)
       (handler/site)
       (with-wrap-json->clojure)
       (wrap-restful-format :formats [:json-kw])))

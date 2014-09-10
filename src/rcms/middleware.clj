@@ -8,7 +8,7 @@
       :updatedAt :updated-at
       :employeeId :employee-id
       :folderOrder :folder-order
-      :linksOrder :links-order})
+      :linkOrder :link-order})
 
 (defn- json->clojure
   [map]

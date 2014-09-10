@@ -27,7 +27,7 @@
 (def new-link
   {:name "Casino Rama"
    :href "http://casinorama.com"
-   :links_order 2})
+   :link_order 2})
 
 (facts "Facts about links"
   (fact "Return all links in db"

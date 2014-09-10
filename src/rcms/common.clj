@@ -8,7 +8,7 @@
       :updated-at :updated_at
       :employee-id :employee_id
       :folder-order :folder_order
-      :links-order :links_order})
+      :link-order :link_order})
 
 (defn kebab->snake
   [snake-case-map]

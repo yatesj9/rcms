@@ -48,8 +48,10 @@
                                      link-data] :reload true])
 (require '[rcms.config :refer [set-mode!
                                get-settings
-                               get-mode]])
+                               get-mode] :reload true])
 (require '[rcms.db :as sql :reload true])
+
+(get-mode)
 
 ;Set connection and create tables
 (sql/set-connection! (sql/pooled-datasource (get-settings :database :connection)))
