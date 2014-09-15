@@ -4,11 +4,27 @@ RCMS is going to be an API for creating a CMS using the HTTP standard GET/POST/P
 
 ## Installation
 ---
-Coming Soon, still in early stages
+Still in early stages..
+
+resources/custom_config.clj = Development/Production configuration
+* resource path
+* client-api-token
+* database url/username/password  
+
+```clojure
+{:resource {
+    :dev-path "path to files"}
+  :token {
+    :dev-client-api-token "guid"}
+  :database {
+    :dev-url "db url"
+    :dev-username "username"
+    :dev-password "password"}}
+```
 
 ## Usage
 ---
-Coming Soon, still in early stages
+Still in early stages..
 
 Upload
 ```clojure
@@ -63,85 +79,22 @@ POST   /users/tokens {:token 'token' :id 'id'}
 ---
 Routes/Model functions
 * Upload
-    * ~~Single Upload~~
-        * ~~POST~~ 
-        * ~~Add to DB table~~
-        * ~~Folder selection~~
-        * ~~Tag selection~~
-        * Validation  
-    * Multi Upload
-        * ~~POST~~ 
-        * ~~Add to DB table~~   
-        * ~~Folder selection~~
-        * ~~Tag selection~~
-        * Validation  
+    * Validation
 * Folders
-    * GET
-        * ~~Get list of folder from path~~
-        * ~~Get single folder from DB~~
-        * ~~Get list of folder's from DB~~
-        * ~~Get single folder from DB~~
-        * Validation
-    * POST
-        * ~~Create~~
-        * ~~Add to DB table~~
-            * ~~Allow only one record per folder name~~ 
-        * Validation
-    * PUT
-        * ~~Rename~~
-        * ~~Change DB table~~
-        * ~~Change filesystem folder~~
-        * Validation
-    * DELETE
-        * ~~Remove~~
-        * ~~Remove from DB table~~
-        * ~~Remove from filessystem~~
-        * Validation
+    * Validation
 * Files
-    * ~~Get single file from DB~~
-    * ~~Get all files from folder in DB~~
-    * ~~Save file to DB~~
-    * ~~Remove file from DB~~
-    * ~~GET single~~
-    * ~~GET all~~
-    * ~~GET all from folder~~
-    * ~~DELETE~~
+    * ~~Complete~~
 * Tags
-    * ~~Get all tags~~
-    * ~~Get all tags from folder~~
-    * ~~Get specific tag name and folder~~
-    * ~~Save tag to DB~~
-    * GET
-    	* ~~All tags~~
-        * ~~Single tag matching folder~~
-        * ~~All tags from folder~~
-    * POST
-        * ~~Add tag~~ 
-    * DELETE
-        * ~~Remove tag~~ 
+    * ~~Complete~~
 * Links
-    * ~~Get all links~~
-    * ~~Save links~~
-    * GET
-        * ~~All links~~ 
-    * POST
-        * ~~Add single link~~ 
-    * DELETE
-        * ~~Delete link~~ 
-
+    * ~~Complete~~
+    
 Liberator - Resource management
-* ~~Add~~
+* ~~Complete~~
 
 Database Connection
-* ~~Bone connection pooling~~
-* ~~Create Tbl~~
-* ~~Drop Tbl~~
-* Test - DB
-    * ~~H2 DB~~
-    * ~~Initialization~~
-    * ~~Schema~~
-    * ~~Fixtures~~
-* Development - DB
+* ~~Test - DB~~
+* ~~Development - DB~~
 * Production - DB
 
 Authentication - Vault-API, *link to follow*
@@ -179,7 +132,7 @@ DB
 * Links
     * id
     * name
-* Permissions
+* Permissions *to be determined*
     * id
     * employee_id
     * section ie.Documents/Links/Announcements/Banner/Image-links

@@ -10,6 +10,9 @@
   [new-mode]
   (reset! mode new-mode))
 
+(def load-config
+     (load-file "resources/custom_config.clj"))
+
 (def ^:private tsettings {
      :resource {
       :path "resources/files/"}
@@ -23,12 +26,24 @@
 
 (def ^:private dsettings {
      :resource {
-      :path "/mnt/crewview"}
+      :path (-> load-config
+                :resource
+                :dev-path)}
+     :token {
+       :client-api-token (-> load-config
+                             :token
+                             :dev-client-api-token)}
      :database {
       :connection {
-        :url "jdbc:sqlserver://ts58;databaseName=crewview"
-        :username "crewview"
-        :password "crewview"
+        :url (-> load-config
+                 :database
+                 :dev-url)
+        :username (-> load-config
+                      :database
+                      :dev-username)
+        :password (-> load-config
+                      :database
+                      :dev-password)
         :min-connections 1
         :max-connections 1
         :partitions 1

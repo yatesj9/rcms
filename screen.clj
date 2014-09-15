@@ -114,3 +114,22 @@ dir-names
 (map #(assoc %1 :id %2) me-map (range 1 10))
 
 (cheshire/generate-string {:name "Security" :resource "resources/files/security"})
+
+(require '[rcms.models.files :reload true :as file])
+
+(file/save-file {:folder-name "Smoke Signals" :file-name "Smoke2013.pdf" :tag "Test"})
+
+(require '[rcms.models.tags :as tag])
+
+(tag/save-tag {:name "Test" :folder-name "Smoke Signals"})
+
+(def load-config
+     (load-file "resources/custom_config.clj"))
+
+(-> load-config
+    :token
+    :client-api-token)
+
+(-> load-config
+    :resource
+    :path)
