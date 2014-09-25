@@ -17,21 +17,28 @@
 
 (defn get-file
   "Return specific file"
-  [file-name]
-  (sql/query (db/get-connection) ["select * from files where file_name = ? " file-name]))
+  [file-name folder-name]
+  (sql/query (db/get-connection) ["select * from files where file_name = ?
+                                  AND folder_name = ? " file-name folder-name]))
+
+(defn file-exists?
+  "Takes file-map, checks if file exists, matches name and folder"
+  [{:keys [file-name folder-name]:as file-map}]
+  (let [check-file (get-file file-name folder-name)]
+    (and
+     (= file-name (:file_name (first check-file)))
+     (= folder-name (:folder_name (first check-file))))))
 
 (defn save-file
-  "Takes a file-map, saves to DB {:folder-name '##' :file-name '##' :description '##'}"
+  "Takes a file-map, saves to DB {:folder-name '##' :file-name '##' :updated-at '###}"
   [file-map]
   (let [file (-> file-map
                  (assoc :updated-at (System/currentTimeMillis))
                  (kebab->snake))
-        file-record (get-file (:file-name file-map))]
-    (if (empty? file-record)
+        file-record (file-exists? file-map)]
+    (if-not file-record
         (sql/insert! (db/get-connection) :files file)
-        (sql/update! (db/get-connection) :files
-                                         file
-                                         ["file_name = ?" (:file-name file-map)]))))
+        {:msg "File exists"})))
 
 (defn remove-file
   "Removes file from DB"

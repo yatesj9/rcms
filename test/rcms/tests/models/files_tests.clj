@@ -2,7 +2,8 @@
   (:require [rcms.models.files :refer [get-files
                                        get-file
                                        save-file
-                                       remove-file]]
+                                       remove-file
+                                       file-exists?]]
             [rcms.tests.helper :refer [initialize-test-connection
                                        file-schema
                                        file-data]]
@@ -28,22 +29,34 @@
   {:folder-name "People"
    :file-name "testing.pdf"})
 
+(def new-file2
+  {:folder-name "Smoke Signals"
+   :file-name "testing.pdf"})
+
 (facts "Facts about files"
   (fact "Return files from folder name People"
     (map #(dissoc %  :description :updated_at ) (get-files "People"))
     => '({:file_name "my_mash.jpg" :folder_name "People" :id 1 :tag nil}))
 
   (fact "Should return single file using name"
-    (dissoc (first (get-file "my_mash.jpg"))  :description :updated_at)
+    (dissoc (first (get-file "my_mash.jpg" "People"))  :description :updated_at)
       =>  {:file_name "my_mash.jpg" :folder_name "People" :id 1 :tag nil})
+
+  (fact "Should return false when file does not exist"
+    (file-exists? new-file) => false)
+
+  (fact "Should return true when file exists, matching folder and file-name"
+    (file-exists? {:file-name "my_mash.jpg"
+                   :folder-name "People"}) => true)
 
   (fact "Should save file to DB"
     (save-file new-file)
-    (dissoc (first (get-file "testing.pdf")) :updated_at :id)
+    (dissoc (first (get-file "testing.pdf" "People")) :updated_at :id)
       => {:file_name "testing.pdf"
           :folder_name "People"
-          :tag nil})
+          :tag nil}
+    (save-file new-file) => {:msg "File exists"})
 
   (fact "Should remove file from db"
     (remove-file "testing.pdf") => {:msg "File removed"}
-    (get-file "testing.pdf") => '()))
+    (get-file "testing.pdf" "People") => '()))

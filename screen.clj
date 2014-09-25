@@ -73,7 +73,11 @@
 (sql/populate (sql/get-connection) :links link-data)
 
 (require '[clojure.java.jdbc :as sqlc])
-(sqlc/query (sql/get-connection) ["select * from folders"])
+(sqlc/query (sql/get-connection) ["select * from files"])
+
+(sqlc/update! (sql/get-connection) :files
+                                  {:file_name "banner" :folder_name "Banner"}
+                                  ["file_name = ? and folder_name = ?" "banner2" "Banner"])
 
 ;-------------------------------------------------------------------------------
 ;Misc
@@ -86,12 +90,27 @@
 (def get-dir
      (fs/iterate-dir "resources/files"))
 
+get-dir
+
 (def dir-names
  (get (first (fs/iterate-dir "resources/files")) 1))
 
 dir-names
 
-(map #(str %) dir-names)
+(last (clojure.string/split (first (map #(str %) (fs/list-dir "resources/files/People"))) #"\/"))
+
+(def folder
+     (fs/list-dir "resources/files/Banner"))
+
+(defn get-file-name
+  "Takes list of files from fs/list-dir, returns all file names"
+  [file-list]
+  (->> folder
+    (map #(str %));Converts to a string
+    (map #(clojure.string/split % #"\/"));Splits by dashes
+    (map #(last %))));Returns last entry for file name
+
+(get-file-name folder)
 
 (apply merge (map #(hash-map (keyword (str %1)) %2) (range) dir-names))
 
@@ -117,7 +136,7 @@ dir-names
 
 (require '[rcms.models.files :reload true :as file])
 
-(file/save-file {:folder-name "Smoke Signals" :file-name "Smoke2013.pdf" :tag "Test"})
+(file/save-file {:folder-name "Banner" :file-name "Smoke2013.pdf" :tag "Test"})
 
 (require '[rcms.models.tags :as tag])
 
@@ -133,3 +152,12 @@ dir-names
 (-> load-config
     :resource
     :path)
+
+;buddy
+
+(require '[buddy.sign.jws :as jws])
+
+(def sign-test
+     (jws/sign {:employee-id 6694 :token "2342-234-234-dfsfjaskfdj-234234" :expires 234234324} "mysupersecretcode"))
+
+(jws/unsign sign-test "mysupersecretcode")
