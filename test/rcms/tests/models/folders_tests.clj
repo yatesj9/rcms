@@ -64,6 +64,7 @@
     (get-folders) => (map #(assoc %1 :id %2)
                           (conj folder-data {:id nil
                                         :name "Folder 1"
+                                        :hidden nil
                                         :folder_order nil}) (range 1 4)))
 
   (fact "Should remove the folder from DB, and verify"
@@ -74,5 +75,6 @@
     (rename-folder "People" "PeoplePower") => {:msg "Folder renamed"}
     (get-folder "PeoplePower") => {:id 1
                                    :name "PeoplePower"
-                                   :folder_order 2}
+                                   :folder_order 2
+                                   :hidden false}
     (rename-folder "PeoplePower" "People")))

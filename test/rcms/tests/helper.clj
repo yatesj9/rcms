@@ -22,13 +22,16 @@
   {:table :folders
     :fields ["id int not null identity(1,1),
              name varchar(50) not null,
-             folder_order int"]})
+             folder_order int,
+             hidden boolean"]})
 
 (def folder-data
   [{:name "People"
-    :folder_order 2}
+    :folder_order 2
+    :hidden false}
    {:name "Smoke Signals"
-    :folder_order 1}])
+    :folder_order 1
+    :hidden false}])
 
 ; --- Files Table---------------------------------------------------------------
 
