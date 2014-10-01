@@ -2,7 +2,8 @@
   (:require [compojure.core :refer [defroutes ANY DELETE]]
             [rcms.models.files :as fl]
             [liberator.core :refer [resource]]
-            [ring.util.response :refer [file-response]]))
+            [ring.util.response :refer [file-response]]
+            [rcms.config :refer [get-settings]]))
 
 (def ^:private files-resource
   (resource
@@ -26,4 +27,4 @@
   (ANY "/files/:folder" request (files request))
   (DELETE "/files/:folder/:filename" request (files request))
   (ANY "/files/:folder/:filename" [folder filename]
-       (file-response (str "resources/files/" folder "/" filename))))
+       (file-response (str (get-settings :resource :path) folder "/" filename))))

@@ -1,10 +1,10 @@
 # RCMS API
 
-RCMS is going to be an API for creating a CMS using the HTTP standard GET/POST/PUT/DELETE. Client side can be any framework or completely custom. An AngularJS frontend will be added once RCMS API is closer to completion. 
+RCMS is an API for creating a CMS using the HTTP standard GET/POST/PUT/DELETE. Client side can be any framework or completely custom. An AngularJS frontend will be added once RCMS API is closer to completion. Authorization to the API is handled through client-api-key's.
 
 ## Installation
 ---
-Still in early stages..
+Still in early stages...
 
 resources/custom_config.clj = Development/Production configuration
 * resource path
@@ -41,7 +41,7 @@ POST   /multi-upload [{:file {:size '##' :tempfile #<File > :filename '######'}
 Folders
 ```clojure
 GET    /folders
-POST   /folders          {:name 'foldername' :folderOrder '#'}
+POST   /folders          {:name 'foldername' :folderOrder '#' :hidden 'boolean'}
 PUT    /folders/{folder} {:newName 'foldername'}
 DELETE /folders/{folder} 
 ```
@@ -81,6 +81,7 @@ Routes/Model functions
 * Upload
     * Validation
 * Folders
+    * Hidden folders 
     * Validation
 * Files
     * ~~Complete~~
@@ -118,6 +119,7 @@ DB
     * id 
     * name
     * folder_order
+    * hidden
 * Files
     * id
     * folder_name

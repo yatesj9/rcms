@@ -97,7 +97,7 @@ Single Map of folder
 {:headers {'Content-Type: application/json'
 	       'Accept: application/json'
 		   'client-api-token: GUID'}
- :body {:name "Folder Name"}
+ :body {:name "Folder Name" :folderOrder "#" :hidden "boolean"}
 ```
 
 ## Resource
