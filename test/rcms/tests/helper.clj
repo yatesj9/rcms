@@ -92,3 +92,27 @@
    {:name "GameSpot"
     :href "http://www.gamespot.com"
     :link_order 1}])
+
+; --- Annoucnements Table-------------------------------------------------------
+
+(def announcement-schema
+  {:table :announcements
+   :fields ["id int not null identity(1,1),
+            title varchar(50) not null,
+            body varchar(255) not null,
+            expires_at bigint,
+            created_at bigint"]})
+
+(def announcement-data
+  [{:title "Welcome"
+    :body "Welcome to RCMS this is a body <h1>TITLE</h1>"
+    :expires_at (+ 123123 (System/currentTimeMillis))
+    :created_at (System/currentTimeMillis)}
+   {:title "Another"
+    :body "This is another announcement"
+    :expires_at (+ 193493 (System/currentTimeMillis))
+    :created_at (System/currentTimeMillis)}
+   {:title "Expired Announcement"
+    :body "not important"
+    :expires_at (- (System/currentTimeMillis) 30493 )
+    :created_at (System/currentTimeMillis)}])

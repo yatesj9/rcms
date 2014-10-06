@@ -69,6 +69,14 @@ POST   /links        {:name 'linkname' :href 'linkhref' :linkOrder '#'}
 DELETE /links/{name}
 ```
 
+Announcements
+```clojure
+GET    /announcements
+GET    /announcements/valid
+POST   /announcements         {:title 'title' :body 'body' :expires_at 'date'}
+DELETE /ammouncements/{title}
+```
+
 Authorization
 ```clojure
 GET    /users
@@ -89,6 +97,11 @@ Routes/Model functions
     * ~~Complete~~
 * Links
     * ~~Complete~~
+* Announcements
+    * ~~Get~~
+    * ~~Save~~
+    * ~~Delete~~
+    * GET/POST/DELETE 
     
 Liberator - Resource management
 * ~~Complete~~
@@ -135,6 +148,12 @@ DB
     * id
     * name
     * link_order
+* Announcements
+    * id
+    * title
+    * body
+    * expires_at
+    * created_at
 * Permissions *to be determined*
     * id
     * employee_id

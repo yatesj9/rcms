@@ -35,6 +35,12 @@
 	POST    /tags                       - Add new tag
 	DELETE  /tags/{folder}/{tag}        - Delete tag
 
+    ** Announcements **
+    
+    GET     /announcements              - Get all announcements
+    GET     /announcements/valid        - Get all non-expired announcements
+    POST    /announcements              - Add new announcements
+    DELETE  /announcements/{title}      - Delete announcements
 ### Authentication Routes - Vault-API
 
 	POST 	/tokens 			        - Authenticate Employee	
