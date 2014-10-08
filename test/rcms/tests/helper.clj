@@ -106,11 +106,11 @@
 (def announcement-data
   [{:title "Welcome"
     :body "Welcome to RCMS this is a body <h1>TITLE</h1>"
-    :expires_at (+ 123123 (System/currentTimeMillis))
+    :expires_at (+ 234234123123 (System/currentTimeMillis))
     :created_at (System/currentTimeMillis)}
    {:title "Another"
     :body "This is another announcement"
-    :expires_at (+ 193493 (System/currentTimeMillis))
+    :expires_at (+ 1934932342342 (System/currentTimeMillis))
     :created_at (System/currentTimeMillis)}
    {:title "Expired Announcement"
     :body "not important"

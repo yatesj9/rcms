@@ -89,7 +89,7 @@ Routes/Model functions
 * Upload
     * Validation
 * Folders
-    * Hidden folders 
+    * ~~Hidden folders~~
     * Validation
 * Files
     * ~~Complete~~
@@ -98,10 +98,7 @@ Routes/Model functions
 * Links
     * ~~Complete~~
 * Announcements
-    * ~~Get~~
-    * ~~Save~~
-    * ~~Delete~~
-    * GET/POST/DELETE 
+    * ~~Complete~~
     
 Liberator - Resource management
 * ~~Complete~~

@@ -10,6 +10,7 @@
             [rcms.routes.files :refer [file-routes]]
             [rcms.routes.tags :refer [tag-routes]]
             [rcms.routes.links :refer [link-routes]]
+            [rcms.routes.announcements :refer [announcement-routes]]
             [rcms.middleware :refer [with-wrap-json->clojure]]))
 
 (defn init []
@@ -28,6 +29,7 @@
               file-routes
               tag-routes
               link-routes
+              announcement-routes
               app-routes)
       (wrap-file-info)
       (handler/site)
