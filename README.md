@@ -73,7 +73,7 @@ Announcements
 ```clojure
 GET    /announcements
 GET    /announcements/valid
-POST   /announcements         {:title 'title' :body 'body' :expires_at 'date'}
+POST   /announcements         {:title 'title' :body 'body' :expiresAt 'date'}
 DELETE /ammouncements/{title}
 ```
 

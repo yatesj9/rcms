@@ -45,7 +45,9 @@
                                      tag-schema
                                      tag-data
                                      link-schema
-                                     link-data] :reload true])
+                                     link-data
+                                     announcement-schema
+                                     announcement-data] :reload true])
 (require '[rcms.config :refer [set-mode!
                                get-settings
                                get-mode] :reload true])
@@ -59,6 +61,7 @@
 (sql/create-table! (sql/get-connection) (:table file-schema) (:fields file-schema))
 (sql/create-table! (sql/get-connection) (:table tag-schema) (:fields tag-schema))
 (sql/create-table! (sql/get-connection) (:table link-schema) (:fields link-schema))
+(sql/create-table! (sql/get-connection) (:table announcement-schema) (:fields announcement-schema))
 
 ;Drop tables
 (sql/drop-table! (sql/get-connection) (:table folder-schema))
@@ -71,6 +74,7 @@
 (sql/populate (sql/get-connection) :files file-data)
 (sql/populate (sql/get-connection) :tags tag-data)
 (sql/populate (sql/get-connection) :links link-data)
+(sql/populate (sql/get-connection) :announcements announcement-data)
 
 (require '[clojure.java.jdbc :as sqlc])
 (sqlc/query (sql/get-connection) ["select * from files"])

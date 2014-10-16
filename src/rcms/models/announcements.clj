@@ -25,7 +25,7 @@
   "Takes a map {:title 'title' :body 'body' :expires_at 'date'} saves to DB or updates"
   [ann-map]
   (let [ann (-> ann-map
-                (assoc :created_at (System/currentTimeMillis))
+                (assoc :created-at (System/currentTimeMillis))
                 (kebab->snake))
         ann-record (get-announcement (:title ann-map))]
     (if (empty? ann-record)
