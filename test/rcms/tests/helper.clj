@@ -23,7 +23,7 @@
     :fields ["id int not null identity(1,1),
              name varchar(50) not null,
              folder_order int,
-             hidden boolean"]})
+             hidden bit"]})
 
 (def folder-data
   [{:name "People"
