@@ -59,7 +59,6 @@
 (sql/set-connection! (sql/pooled-datasource (get-settings :database :connection)))
 
 (sql/create-table! (sql/get-connection) (:table folder-schema) (:fields folder-schema))
-
 (sql/create-table! (sql/get-connection) (:table file-schema) (:fields file-schema))
 (sql/create-table! (sql/get-connection) (:table tag-schema) (:fields tag-schema))
 (sql/create-table! (sql/get-connection) (:table link-schema) (:fields link-schema))
@@ -152,12 +151,8 @@ dir-names
      (load-file "resources/custom_config.clj"))
 
 (-> load-config
-    :token
-    :client-api-token)
-
-(-> load-config
     :resource
-    :path)
+    :prod-path)
 
 ;buddy
 

@@ -49,9 +49,35 @@
         :partitions 1
         :log-statements? true}}})
 
+(def ^:private psettings {
+     :resource {
+      :path (-> load-config
+                :resource
+                :prod-path)}
+     :token {
+       :client-api-token (-> load-config
+                             :token
+                             :prod-client-api-token)}
+     :database {
+      :connection {
+        :url (-> load-config
+                 :database
+                 :prod-url)
+        :username (-> load-config
+                      :database
+                      :prod-username)
+        :password (-> load-config
+                      :database
+                      :prod-password)
+        :min-connections 1
+        :max-connections 1
+        :partitions 1
+        :log-statements? true}}})
+
 (def opts {
   :test tsettings
-  :development dsettings})
+  :development dsettings
+  :production psettings})
 
 (defn get-settings
   [& selections]

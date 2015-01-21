@@ -13,13 +13,18 @@ resources/custom_config.clj = Development/Production configuration
 
 ```clojure
 {:resource {
-    :dev-path "path to files"}
+    :dev-path "path to files"
+    :prod-path "path to files"}
   :token {
-    :dev-client-api-token "guid"}
+    :dev-client-api-token "guid"
+    :prod-client-api-token "guid"}
   :database {
     :dev-url "db url"
+    :prod-url "db url"
     :dev-username "username"
-    :dev-password "password"}}
+    :prod-username "username"
+    :dev-password "password"
+    :prod-password "password"}}
 ```
 
 ## Usage
@@ -72,7 +77,7 @@ DELETE /links/{name}
 Announcements
 ```clojure
 GET    /announcements
-GET    /announcements/valid
+GET    /announcements/{title}
 POST   /announcements         {:title 'title' :body 'body' :expiresAt 'date'}
 DELETE /ammouncements/{title}
 ```
@@ -106,7 +111,7 @@ Liberator - Resource management
 Database Connection
 * ~~Test - DB~~
 * ~~Development - DB~~
-* Production - DB
+* ~~Production - DB~~
 
 Authentication - Vault-API, *link to follow*
 
