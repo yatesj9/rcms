@@ -32,18 +32,25 @@ resources/custom_config.clj = Development/Production configuration
 Still in early stages..
 
 Upload
+
 ```clojure
 POST   /upload       {:file {:size '##' :tempfile #<File > :filename '######'}
                       :folder "foldername"
                       :tag "tagname"}
+       
 POST   /multi-upload [{:file {:size '##' :tempfile #<File > :filename '######'}
                              {:size '##' :tempfile #<File > :filename '######'}
                        :folder "foldername"
                        :tag "tagname"}]
         NOTE: Folder and tag is applied to all files in multi-upload
+        
+       *Note using Chrome Rest Console*
+       Request Params = folder - *foldername*
+       Parameter Key = file
 ```
 
 Folders
+
 ```clojure
 GET    /folders
 POST   /folders          {:name 'foldername' :folderOrder '#' :hidden 'boolean'}
@@ -52,6 +59,7 @@ DELETE /folders/{folder}
 ```
 
 Files
+
 ```clojure
 GET    /files
 GET    /files/{folder}
@@ -60,6 +68,7 @@ DELETE /files/{folder}/{filename}
 ```
 
 Tags
+
 ```clojure
 GET    /tags
 GET    /tags/{folder}
@@ -68,6 +77,7 @@ DELETE /tags/{folder}/{tag}
 ```
 
 Links
+
 ```clojure
 GET    /links
 POST   /links        {:name 'linkname' :href 'linkhref' :linkOrder '#'}
@@ -75,6 +85,7 @@ DELETE /links/{name}
 ```
 
 Announcements
+
 ```clojure
 GET    /announcements
 GET    /announcements/{title}
@@ -83,6 +94,7 @@ DELETE /ammouncements/{title}
 ```
 
 Authorization
+
 ```clojure
 GET    /users
 POST   /users/tokens {:token 'token' :id 'id'}

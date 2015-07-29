@@ -55,6 +55,8 @@
 
 (get-mode)
 
+(set-mode! :test)
+
 ;Set connection and create tables
 (sql/set-connection! (sql/pooled-datasource (get-settings :database :connection)))
 
@@ -162,3 +164,5 @@ dir-names
      (jws/sign {:employee-id 6694 :token "2342-234-234-dfsfjaskfdj-234234" :expires 234234324} "mysupersecretcode"))
 
 (jws/unsign sign-test "mysupersecretcode")
+
+(get-settings :token :client-api-token)

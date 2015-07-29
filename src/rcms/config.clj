@@ -16,6 +16,8 @@
 (def ^:private tsettings {
      :resource {
       :path "resources/files/"}
+     :token {
+      :client-api-token "1"}
      :database {
       :connection {
         :url "jdbc:h2:mem:testdb"
