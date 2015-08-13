@@ -125,11 +125,9 @@ Database Connection
 * ~~Development - DB~~
 * ~~Production - DB~~
 
-Authentication - Vault-API, *link to follow*
+Authentication
 
-API-KEY
-* Add
-* Remove
+All request require a valid "client-api-token" in the {:headers} of the request
 
 Authorization - local/remote DB table
 * Upload permissions

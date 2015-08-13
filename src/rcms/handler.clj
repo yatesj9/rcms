@@ -11,7 +11,8 @@
             [rcms.routes.tags :refer [tag-routes]]
             [rcms.routes.links :refer [link-routes]]
             [rcms.routes.announcements :refer [announcement-routes]]
-            [rcms.middleware :refer [with-wrap-json->clojure]]))
+            [rcms.middleware :refer [with-wrap-json->clojure
+                                     with-authenticated-request ]]))
 
 (defn init []
   (println "rcms is starting"))
@@ -31,6 +32,7 @@
               link-routes
               announcement-routes
               app-routes)
+      (with-authenticated-request)
       (wrap-file-info)
       (handler/site)
       (with-wrap-json->clojure)

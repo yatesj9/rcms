@@ -55,7 +55,9 @@
 
 (get-mode)
 
-(set-mode! :test)
+(get-settings :token :client-api-token)
+
+(set-mode! :development)
 
 ;Set connection and create tables
 (sql/set-connection! (sql/pooled-datasource (get-settings :database :connection)))

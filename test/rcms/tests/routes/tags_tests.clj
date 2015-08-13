@@ -1,7 +1,8 @@
 (ns rcms.tests.routes.tags-tests
   (:require [rcms.handler :refer [app]]
             [rcms.models.tags :as tg]
-            [cheshire.custom :refer [decode]])
+            [cheshire.custom :refer [decode]]
+            [rcms.tests.helper :refer [build-req]])
   (:use [midje.sweet]
         [ring.mock.request :refer [request]]))
 
@@ -11,19 +12,19 @@
 
 (facts "Facts about tag Resource, GET/POST/PUT/DELETE"
   (fact "GET - Should return all tags from DB"
-    (decode (:body (app (request :get "/tags"))) true)
+    (decode (:body (app (build-req (request :get "/tags")))) true)
       => (tg/get-all-tags))
 
   (fact "GET - Should return tags from specific folder"
-    (decode (:body (app (request :get "/tags/People"))) true)
+    (decode (:body (app (build-req (request :get "/tags/People")))) true)
       => (tg/get-folder-tags "People"))
 
   (fact "POST - Should add tag to DB"
-    (app (assoc (request :post "/tags")
+    (app (assoc (build-req (request :post "/tags"))
                        :params {:name "Boring" :folderName "People"}))
     (dissoc (last (tg/get-folder-tags "People")) :id)
       => {:name "Boring" :folder_name "People"})
 
   (fact "DELETE - Should remove tag from DB"
-    (app (request :delete "/tags/People/Boring"))
+    (app (build-req (request :delete "/tags/People/Boring")))
     (tg/get-folder-tag-name {:name "Boring" :folder "People"}) => '()))

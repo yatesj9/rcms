@@ -17,7 +17,7 @@
      :resource {
       :path "resources/files/"}
      :token {
-      :client-api-token "1"}
+      :client-api-token "GUID"}
      :database {
       :connection {
         :url "jdbc:h2:mem:testdb"

@@ -16,6 +16,11 @@
            (db/pooled-datasource (get-settings :database :connection)))))
   @connection))
 
+(defn build-req
+  [request]
+  (let [client-token {:client-api-token (get-settings :token :client-api-token)}]
+    (assoc request :headers (merge (:headers request) client-token))))
+
 ; --- Folders Table-------------------------------------------------------------
 
 (def folder-schema
