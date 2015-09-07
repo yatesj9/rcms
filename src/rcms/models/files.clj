@@ -3,7 +3,9 @@
             [clojure.java.jdbc :as sql]
             [rcms.config :refer [get-settings]]
             [rcms.common :refer [kebab->snake]]
-            [me.raynes.fs :as fs]))
+            [me.raynes.fs :as fs]
+            [fivetonine.collage.util :as util]
+            [fivetonine.collage.core :refer :all]))
 
 (defn get-all-files
   "Return vector of all files in db"
@@ -51,3 +53,32 @@
   [folder name]
   (when (fs/file? (str (get-settings :resource :path) folder "/" name))
    (fs/delete (str (get-settings :resource :path) folder "/" name))))
+
+(def valid-images
+     ["image/jpeg" "image/png"])
+
+(defn- image?
+  [content-type]
+  (> (.indexOf valid-images content-type) -1))
+
+(defn- resize-image
+  [folder image]
+  (let [path (str (get-settings :resource :path) folder "/")]
+   (with-image (str path image)
+              (resize :width 1024)
+              (util/save (str path image)))))
+
+(defn- create-thumbnail
+  [folder image]
+  (let [path (str (get-settings :resource :path) folder"/")]
+   (with-image (str path image)
+              (resize :width 150)
+              (util/save (str path "thumb_" image)))))
+
+(defn process-image
+  [folder image]
+  (.start (Thread.
+   (do
+    (resize-image folder image)
+    (create-thumbnail folder image)))))
+
