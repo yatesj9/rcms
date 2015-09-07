@@ -104,7 +104,7 @@
   {:table :announcements
    :fields ["id int not null identity(1,1),
             title varchar(50) not null,
-            body varchar(255) not null,
+            body varchar(max) not null,
             expires_at bigint,
             created_at bigint"]})
 

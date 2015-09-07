@@ -73,6 +73,7 @@
 (sql/drop-table! (sql/get-connection) (:table file-schema))
 (sql/drop-table! (sql/get-connection) (:table tag-schema))
 (sql/drop-table! (sql/get-connection) (:table link-schema))
+(sql/drop-table! (sql/get-connection) (:table announcement-schema))
 
 ;Pre-populate with fixture data
 (sql/populate (sql/get-connection) :folders folder-data)
@@ -168,3 +169,36 @@ dir-names
 (jws/unsign sign-test "mysupersecretcode")
 
 (get-settings :token :client-api-token)
+
+;; Image Collage
+
+(require '[fivetonine.collage.util :as util])
+(require '[fivetonine.collage.core :refer :all])
+
+(defn resize-image
+  [folder image]
+  (let [path (str "resources/files/" folder "/")]
+   (with-image (str path image)
+              (resize :width 1024)
+              (util/save (str path image)))))
+
+(resize-image "LandGal" "MagicEarth.jpg")
+
+(defn create-thumbnail
+  [folder image]
+  (let [path (str "resources/files/"folder"/")
+        thumb_path (str "resources/files/"folder"/thumbnails/") ]
+   (with-image (str path image)
+              (resize :width 150)
+              (util/save (str thumb_path "thumb_" image)))))
+
+(create-thumbnail "LandGal" "MagicEarth.jpg")
+
+(defn process-image
+  [folder image]
+  (do
+    (resize-image folder image)
+    (create-thumbnail folder image)))
+
+(process-image "LandGal" "Book.png")
+

@@ -18,7 +18,8 @@
                  [liberator "0.13"]
                  [midje "1.6.3"]
                  [ring-middleware-format "0.5.0"]
-                 [ring.middleware.logger "0.5.0"]]
+                 [ring.middleware.logger "0.5.0"]
+                 [fivetonine/collage "0.2.0"]]
   :plugins [[lein-ring "0.8.10"]
             [lein-autoexpect "1.2.2"]]
   :ring {:handler rcms.handler/app
