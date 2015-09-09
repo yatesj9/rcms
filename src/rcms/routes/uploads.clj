@@ -5,6 +5,7 @@
             [noir.response :refer [redirect]]
             [rcms.config :refer [get-settings]]
             [rcms.models.files :refer [save-file
+                                       image?
                                        process-image]]))
 
 (defn resource-path
@@ -14,14 +15,13 @@
   ([folder]
    (str (get-settings :resource :path) folder)))
 
-
 (defn handle-upload
   "Takes folder and filename, saves to resource-path from config"
   [folder filename]
-  (if (image? (:content-type filename))
-   (do (upload-file (resource-path folder) filename)
-       (process-image folder (:filename filename)))
-   (upload-file (resource-path folder) filename)) )
+  (cond
+    (image? (:content-type filename))(do (upload-file (resource-path folder) filename)
+                                         (process-image folder (:filename filename)))
+    :else (upload-file (resource-path folder) filename)))
 
 (def ^:private upload-resource
      (resource

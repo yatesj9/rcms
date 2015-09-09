@@ -57,15 +57,13 @@
 
 (get-settings :token :client-api-token)
 
-(set-mode! :development)
+(set-mode! :test)
 
 ;Set connection and create tables
 (sql/set-connection! (sql/pooled-datasource (get-settings :database :connection)))
 
 (sql/create-table! (sql/get-connection) (:table folder-schema) (:fields folder-schema))
-
 (sql/create-table! (sql/get-connection) (:table file-schema) (:fields file-schema))
-
 (sql/create-table! (sql/get-connection) (:table tag-schema) (:fields tag-schema))
 (sql/create-table! (sql/get-connection) (:table link-schema) (:fields link-schema))
 (sql/create-table! (sql/get-connection) (:table announcement-schema) (:fields announcement-schema))

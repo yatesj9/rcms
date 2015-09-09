@@ -49,15 +49,17 @@
   {:msg "File removed"})
 
 (defn delete-file
-  "Deletes file from filesystem"
+  "Deletes file from filesystem, deletes thumb_ if exist for images"
   [folder name]
   (when (fs/file? (str (get-settings :resource :path) folder "/" name))
-   (fs/delete (str (get-settings :resource :path) folder "/" name))))
+    (do (fs/delete (str (get-settings :resource :path) folder "/" name))
+      (try
+        (fs/delete (str (get-settings :resource :path) folder "/thumb_" name))))))
 
 (def valid-images
-     ["image/jpeg" "image/png"])
+   ["image/jpeg" "image/png"])
 
-(defn- image?
+(defn image?
   [content-type]
   (> (.indexOf valid-images content-type) -1))
 
