@@ -18,6 +18,11 @@ resources/custom_config.clj = Development/Production configuration
   :token {
     :dev-client-api-token "guid"
     :prod-client-api-token "guid"}
+  :image {
+    :dev-size 1024 ;image width
+    :dev-thumb-size 150
+    :prod-size 1024 ;image width
+    :prod-thumb-size 150
   :database {
     :dev-url "db url"
     :prod-url "db url"
@@ -104,10 +109,9 @@ POST   /users/tokens {:token 'token' :id 'id'}
 ---
 Routes/Model functions
 * Upload
-    * Validation
+    * ~~Complete~~
 * Folders
-    * ~~Hidden folders~~
-    * Validation
+    * ~~Complete~~
 * Files
     * ~~Complete~~
 * Tags

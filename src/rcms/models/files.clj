@@ -57,7 +57,7 @@
         (fs/delete (str (get-settings :resource :path) folder "/thumb_" name))))))
 
 (def valid-images
-   ["image/jpeg" "image/png"])
+    ["image/jpeg" "image/png"])
 
 (defn image?
   [content-type]
@@ -67,14 +67,14 @@
   [folder image]
   (let [path (str (get-settings :resource :path) folder "/")]
    (with-image (str path image)
-              (resize :width 1024)
+              (resize :width (get-settings :image :size))
               (util/save (str path image)))))
 
 (defn- create-thumbnail
   [folder image]
   (let [path (str (get-settings :resource :path) folder"/")]
    (with-image (str path image)
-              (resize :width 150)
+              (resize :width (get-settings :image :thumb-size))
               (util/save (str path "thumb_" image)))))
 
 (defn process-image

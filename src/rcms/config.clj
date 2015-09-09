@@ -18,6 +18,9 @@
       :path "resources/files/"}
      :token {
       :client-api-token "GUID"}
+     :image {
+      :size 1024
+      :thumb-size 150}
      :database {
       :connection {
         :url "jdbc:h2:mem:testdb"
@@ -35,6 +38,13 @@
        :client-api-token (-> load-config
                              :token
                              :dev-client-api-token)}
+     :image {
+       :size (-> load-config
+                 :image
+                 :dev-size)
+       :thumb-size (-> load-config
+                       :image
+                       :dev-thumb-size)}
      :database {
       :connection {
         :url (-> load-config
@@ -60,6 +70,13 @@
        :client-api-token (-> load-config
                              :token
                              :prod-client-api-token)}
+     :image {
+       :size (-> load-config
+                 :image
+                 :prod-size)
+       :thumb-size (-> load-config
+                       :image
+                       :prod-thumb-size)}
      :database {
       :connection {
         :url (-> load-config
