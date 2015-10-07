@@ -57,7 +57,7 @@
 
 (get-mode)
 
-(get-settings :token :client-api-token)
+(get-settings :image :thumb-size)
 
 (set-mode! :test)
 
@@ -72,9 +72,7 @@
 
 ;Drop tables
 (sql/drop-table! (sql/get-connection) (:table folder-schema))
-
 (sql/drop-table! (sql/get-connection) (:table file-schema))
-
 (sql/drop-table! (sql/get-connection) (:table tag-schema))
 (sql/drop-table! (sql/get-connection) (:table link-schema))
 (sql/drop-table! (sql/get-connection) (:table announcement-schema))
